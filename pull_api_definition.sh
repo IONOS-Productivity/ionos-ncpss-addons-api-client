@@ -512,7 +512,7 @@ stage_changes() {
 	echo "  - docs/*"
 	echo "  - lib/*"
 	echo "  - test/*"
-	echo "  - openapi-generator/*"
+	echo "  - .openapi-generator/*"
 	echo "  - .ncw-mail-configuration.json"
 	echo "  - README.md"
 	echo ""
@@ -525,7 +525,7 @@ stage_changes() {
 	fi
 
 	info "Staging specific files..."
-	git add docs/ lib/ test/ openapi-generator/ .ncw-mail-configuration.json README.md 2>/dev/null || true
+	git add docs/ lib/ test/ .openapi-generator/ .ncw-mail-configuration.json README.md 2>/dev/null || true
 
 	# Show what was staged
 	echo ""
