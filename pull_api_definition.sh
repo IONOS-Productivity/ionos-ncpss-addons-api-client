@@ -498,7 +498,7 @@ show_git_status() {
 	echo "┌──────────────────────────────────────────────────────────────────┐"
 	echo "│ Current Git Status                                              │"
 	echo "└──────────────────────────────────────────────────────────────────┘"
-	git status --short --untracked-files=all
+	git status --short --untracked-files=all | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)'
 	echo ""
 }
 
@@ -530,7 +530,7 @@ stage_changes() {
 	# Show what was staged
 	echo ""
 	echo "Staged changes:"
-	git status --short
+	git status --short | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)'
 	echo ""
 
 	return 0
@@ -579,14 +579,14 @@ create_commit() {
 # Verify commit was created
 verify_commit() {
 	local status
-	status=$(git status --short)
+	status=$(git status --short | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)')
 
 	if [[ -z "${status}" ]]; then
 		info "✓ All changes have been committed"
 		return 0
 	else
 		warn "Warning: There are still uncommitted changes:"
-		git status --short
+		git status --short | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)'
 		return 1
 	fi
 }
@@ -689,7 +689,7 @@ main() {
 	echo "┌──────────────────────────────────────────────────────────────────┐"
 	echo "│ Files to be Committed                                           │"
 	echo "└──────────────────────────────────────────────────────────────────┘"
-	git status --short --untracked-files=all
+	git status --short --untracked-files=all | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)'
 	echo ""
 
 	# Handle commit workflow
