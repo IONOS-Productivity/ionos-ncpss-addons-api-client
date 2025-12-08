@@ -5,6 +5,7 @@ README.md
 composer.json
 docs/Api/MailConfigurationAPIApi.md
 docs/Model/Imap.md
+docs/Model/MailAccountCreatedResponse.md
 docs/Model/MailAccountResponse.md
 docs/Model/MailAddonErrorMessage.md
 docs/Model/MailCreateData.md
@@ -18,6 +19,7 @@ lib/Configuration.php
 lib/FormDataProcessor.php
 lib/HeaderSelector.php
 lib/Model/Imap.php
+lib/Model/MailAccountCreatedResponse.php
 lib/Model/MailAccountResponse.php
 lib/Model/MailAddonErrorMessage.php
 lib/Model/MailCreateData.php

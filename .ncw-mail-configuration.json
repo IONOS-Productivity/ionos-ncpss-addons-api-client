@@ -4,7 +4,7 @@
     "title": "Event Configuration Handler",
     "description": "This is the API client for the Mail Configuration API",
     "contact": {},
-    "version": "2.0.0-20251110130214"
+    "version": "2.0.0-20251208083401"
   },
   "servers": [
     {
@@ -157,7 +157,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MailAccountResponse"
+                  "$ref": "#/components/schemas/MailAccountCreatedResponse"
                 }
               }
             }
@@ -253,9 +253,11 @@
           {
             "name": "appname",
             "in": "path",
+            "description": "app passwords are created for a specific app label\n * for nextcloud we'll support two different app passwords that can be created for the mail account:\n * - 'nextcloud_workspace' for the nextcloud workspace app\n * - 'nextcloud_workspace_user' for additonal user credentials that can be used to connect to the mail account from any other mail client",
             "required": true,
             "schema": {
               "type": "string",
+              "description": "app passwords are created for a specific app label\n * for nextcloud we'll support two different app passwords that can be created for the mail account:\n * - 'nextcloud_workspace' for the nextcloud workspace app\n * - 'nextcloud_workspace_user' for additonal user credentials that can be used to connect to the mail account from any other mail client",
               "enum": [
                 "NEXTCLOUD_WORKSPACE",
                 "NEXTCLOUD_WORKSPACE_USER"
@@ -366,6 +368,7 @@
             "required": true,
             "schema": {
               "type": "string",
+              "description": "app passwords are created for a specific app label\n * for nextcloud we'll support two different app passwords that can be created for the mail account:\n * - 'nextcloud_workspace' for the nextcloud workspace app\n * - 'nextcloud_workspace_user' for additonal user credentials that can be used to connect to the mail account from any other mail client",
               "enum": [
                 "NEXTCLOUD_WORKSPACE",
                 "NEXTCLOUD_WORKSPACE_USER"
@@ -761,7 +764,7 @@
           }
         }
       },
-      "MailAccountResponse": {
+      "MailAccountCreatedResponse": {
         "type": "object",
         "properties": {
           "password": {
@@ -930,6 +933,32 @@
           "path",
           "value"
         ]
+      },
+      "MailAccountResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "The email address of the created mail account.",
+            "example": "abc@something.net"
+          },
+          "nextcloudUserId": {
+            "type": "string",
+            "description": "The Nextcloud user ID associated with the mail account.",
+            "example": "nc_1234567890abcdef"
+          },
+          "server": {
+            "$ref": "#/components/schemas/MailServer",
+            "description": "The configuration for smtp and imap servers.",
+            "example": {
+              "smtpServer": "smtp.example.com",
+              "smtpPort": 587,
+              "imapServer": "imap.example.com",
+              "imapPort": 993,
+              "useSsl": true
+            }
+          }
+        }
       }
     },
     "securitySchemes": {

@@ -16,7 +16,7 @@ All URIs are relative to https://API_HOST/nextcloud, except if the operation def
 ## `createMailbox()`
 
 ```php
-createMailbox($brand, $extRef, $mailCreateData): \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse
+createMailbox($brand, $extRef, $mailCreateData): \IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse
 ```
 
 Creates a mailbox on IONOS plattform that is used for nextcloud user
@@ -63,7 +63,7 @@ try {
 
 ### Return type
 
-[**\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse**](../Model/MailAccountResponse.md)
+[**\IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse**](../Model/MailAccountCreatedResponse.md)
 
 ### Authorization
 
@@ -433,7 +433,7 @@ $apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi
 $brand = 'brand_example'; // string
 $extRef = 'extRef_example'; // string
 $nextcloudUserId = 'nextcloudUserId_example'; // string
-$appname = 'appname_example'; // string
+$appname = 'appname_example'; // string | app passwords are created for a specific app label  * for nextcloud we'll support two different app passwords that can be created for the mail account:  * - 'nextcloud_workspace' for the nextcloud workspace app  * - 'nextcloud_workspace_user' for additonal user credentials that can be used to connect to the mail account from any other mail client
 
 try {
     $result = $apiInstance->setAppPassword($brand, $extRef, $nextcloudUserId, $appname);
@@ -450,7 +450,7 @@ try {
 | **brand** | **string**|  | |
 | **extRef** | **string**|  | |
 | **nextcloudUserId** | **string**|  | |
-| **appname** | **string**|  | |
+| **appname** | **string**| app passwords are created for a specific app label  * for nextcloud we&#39;ll support two different app passwords that can be created for the mail account:  * - &#39;nextcloud_workspace&#39; for the nextcloud workspace app  * - &#39;nextcloud_workspace_user&#39; for additonal user credentials that can be used to connect to the mail account from any other mail client | |
 
 ### Return type
 

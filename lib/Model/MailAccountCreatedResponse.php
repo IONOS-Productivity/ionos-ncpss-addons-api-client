@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Smtp
+ * MailAccountCreatedResponse
  *
  * PHP version 8.1
  *
@@ -41,7 +41,7 @@ use \ArrayAccess;
 use \IONOS\MailConfigurationAPI\Client\ObjectSerializer;
 
 /**
- * Smtp Class Doc Comment
+ * MailAccountCreatedResponse Class Doc Comment
  *
  * @category Class
  * @package  IONOS\MailConfigurationAPI\Client
@@ -49,7 +49,7 @@ use \IONOS\MailConfigurationAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
+class MailAccountCreatedResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -58,7 +58,7 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Smtp';
+    protected static $openAPIModelName = 'MailAccountCreatedResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -66,9 +66,10 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'host' => 'string',
-        'port' => 'int',
-        'sslMode' => 'string'
+        'password' => 'string',
+        'email' => 'string',
+        'nextcloudUserId' => 'string',
+        'server' => '\IONOS\MailConfigurationAPI\Client\Model\MailServer'
     ];
 
     /**
@@ -79,9 +80,10 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'host' => null,
-        'port' => 'int32',
-        'sslMode' => null
+        'password' => null,
+        'email' => null,
+        'nextcloudUserId' => null,
+        'server' => null
     ];
 
     /**
@@ -90,9 +92,10 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'host' => false,
-        'port' => false,
-        'sslMode' => false
+        'password' => false,
+        'email' => false,
+        'nextcloudUserId' => false,
+        'server' => false
     ];
 
     /**
@@ -181,9 +184,10 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'host' => 'host',
-        'port' => 'port',
-        'sslMode' => 'sslMode'
+        'password' => 'password',
+        'email' => 'email',
+        'nextcloudUserId' => 'nextcloudUserId',
+        'server' => 'server'
     ];
 
     /**
@@ -192,9 +196,10 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'host' => 'setHost',
-        'port' => 'setPort',
-        'sslMode' => 'setSslMode'
+        'password' => 'setPassword',
+        'email' => 'setEmail',
+        'nextcloudUserId' => 'setNextcloudUserId',
+        'server' => 'setServer'
     ];
 
     /**
@@ -203,9 +208,10 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'host' => 'getHost',
-        'port' => 'getPort',
-        'sslMode' => 'getSslMode'
+        'password' => 'getPassword',
+        'email' => 'getEmail',
+        'nextcloudUserId' => 'getNextcloudUserId',
+        'server' => 'getServer'
     ];
 
     /**
@@ -265,9 +271,10 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('host', $data ?? [], null);
-        $this->setIfExists('port', $data ?? [], null);
-        $this->setIfExists('sslMode', $data ?? [], null);
+        $this->setIfExists('password', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('nextcloudUserId', $data ?? [], null);
+        $this->setIfExists('server', $data ?? [], null);
     }
 
     /**
@@ -313,82 +320,109 @@ class Smtp implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets host
+     * Gets password
      *
      * @return string|null
      */
-    public function getHost()
+    public function getPassword()
     {
-        return $this->container['host'];
+        return $this->container['password'];
     }
 
     /**
-     * Sets host
+     * Sets password
      *
-     * @param string|null $host host
+     * @param string|null $password The generated app password for the mail account.
      *
      * @return self
      */
-    public function setHost($host)
+    public function setPassword($password)
     {
-        if (is_null($host)) {
-            throw new \InvalidArgumentException('non-nullable host cannot be null');
+        if (is_null($password)) {
+            throw new \InvalidArgumentException('non-nullable password cannot be null');
         }
-        $this->container['host'] = $host;
+        $this->container['password'] = $password;
 
         return $this;
     }
 
     /**
-     * Gets port
+     * Gets email
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getPort()
+    public function getEmail()
     {
-        return $this->container['port'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets port
+     * Sets email
      *
-     * @param int|null $port port
+     * @param string|null $email The email address of the created mail account.
      *
      * @return self
      */
-    public function setPort($port)
+    public function setEmail($email)
     {
-        if (is_null($port)) {
-            throw new \InvalidArgumentException('non-nullable port cannot be null');
+        if (is_null($email)) {
+            throw new \InvalidArgumentException('non-nullable email cannot be null');
         }
-        $this->container['port'] = $port;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets sslMode
+     * Gets nextcloudUserId
      *
      * @return string|null
      */
-    public function getSslMode()
+    public function getNextcloudUserId()
     {
-        return $this->container['sslMode'];
+        return $this->container['nextcloudUserId'];
     }
 
     /**
-     * Sets sslMode
+     * Sets nextcloudUserId
      *
-     * @param string|null $sslMode sslMode
+     * @param string|null $nextcloudUserId The Nextcloud user ID associated with the mail account.
      *
      * @return self
      */
-    public function setSslMode($sslMode)
+    public function setNextcloudUserId($nextcloudUserId)
     {
-        if (is_null($sslMode)) {
-            throw new \InvalidArgumentException('non-nullable sslMode cannot be null');
+        if (is_null($nextcloudUserId)) {
+            throw new \InvalidArgumentException('non-nullable nextcloudUserId cannot be null');
         }
-        $this->container['sslMode'] = $sslMode;
+        $this->container['nextcloudUserId'] = $nextcloudUserId;
+
+        return $this;
+    }
+
+    /**
+     * Gets server
+     *
+     * @return \IONOS\MailConfigurationAPI\Client\Model\MailServer|null
+     */
+    public function getServer()
+    {
+        return $this->container['server'];
+    }
+
+    /**
+     * Sets server
+     *
+     * @param \IONOS\MailConfigurationAPI\Client\Model\MailServer|null $server The configuration for smtp and imap servers.
+     *
+     * @return self
+     */
+    public function setServer($server)
+    {
+        if (is_null($server)) {
+            throw new \InvalidArgumentException('non-nullable server cannot be null');
+        }
+        $this->container['server'] = $server;
 
         return $this;
     }
