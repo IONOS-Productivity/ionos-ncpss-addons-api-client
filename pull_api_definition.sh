@@ -1,10 +1,15 @@
 #!/bin/bash
+#
+# SPDX-FileCopyrightText: 2025 STRATO GmbH
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
 
 set -euo pipefail
 
 # =============================================================================
 # Constants
 # =============================================================================
+
 readonly REQUIRED_CLI_APPS=(curl jq sed git)
 readonly OUTPUT_FILE=".ncw-mail-configuration.json"
 readonly API_PATH="/nextcloud/api-docs/Addon%20API"
@@ -12,6 +17,7 @@ readonly API_PATH="/nextcloud/api-docs/Addon%20API"
 # =============================================================================
 # Global Variables
 # =============================================================================
+
 temp_file=""
 create_branch=false
 branch_name=""
@@ -104,15 +110,29 @@ show_branch_locations() {
 
 # Show usage information
 show_help() {
-	cat <<-EOF
-		Usage: $0 <host>
+	cat <<-'EOF'
+		┌──────────────────────────────────────────────────────────────────┐
+		│ API Definition Update Script                                    │
+		└──────────────────────────────────────────────────────────────────┘
 
-		Arguments:
-		  host    The host where the API spec is hosted
+		USAGE:
+		  ./pull_api_definition.sh <host>
 
-		Examples:
-		  $0 api.example.lan:10443
-		  export API_SPEC_USER=<user> API_SPEC_PASSWORD=<pass>; $0 api.example.lan:10443
+		ARGUMENTS:
+		  host    The host where the API spec is hosted (including port if needed)
+
+		EXAMPLES:
+		  # Update from a specific API host
+		  ./pull_api_definition.sh api.example.lan:10443
+
+		  # With authentication
+		  export API_SPEC_USER=<user> API_SPEC_PASSWORD=<pass>
+		  ./pull_api_definition.sh api.example.lan:10443
+
+		  # Allow insecure SSL (for testing only)
+		  export ALLOW_INSECURE_SSL=1
+		  ./pull_api_definition.sh api.example.lan:10443
+
 	EOF
 }
 
@@ -135,6 +155,10 @@ check_requirements() {
 # Main Functions
 # =============================================================================
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Argument Parsing & Requirements
+# ─────────────────────────────────────────────────────────────────────────────
+
 # Parse command line arguments
 parse_args() {
 	if [[ $# -eq 0 ]]; then
@@ -142,6 +166,10 @@ parse_args() {
 		exit 1
 	fi
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Version Management
+# ─────────────────────────────────────────────────────────────────────────────
 
 # Get API version from local file
 get_local_version() {
@@ -193,19 +221,28 @@ display_versions() {
 	info "Origin/main version: ${origin_version:-none}"
 }
 
+# ─────────────────────────────────────────────────────────────────────────────
+# API Specification Download & Processing
+# ─────────────────────────────────────────────────────────────────────────────
+
 # Download API specification from remote server
 download_api_spec() {
 	local api_spec_host=$1
 	local api_spec_url="https://${api_spec_host}${API_PATH}"
 
-	echo "Update API client definition"
-	echo "API Spec: ${api_spec_url}"
+	echo ""
+	echo "┌──────────────────────────────────────────────────────────────────┐"
+	echo "│ Downloading API Specification                                   │"
+	echo "└──────────────────────────────────────────────────────────────────┘"
+	echo "  URL: ${api_spec_url}"
+	echo ""
 
 	temp_file=$(mktemp)
 
 	local curl_opts="--progress-bar"
 	if [[ "${ALLOW_INSECURE_SSL:-0}" == "1" ]]; then
-		warn "Using --insecure. SSL certificate verification is DISABLED. This is insecure and should only be used for trusted/internal servers."
+		warn "Using --insecure. SSL certificate verification is DISABLED."
+		warn "This is insecure and should only be used for trusted/internal servers."
 		curl_opts="${curl_opts} --insecure"
 	fi
 
@@ -247,6 +284,10 @@ handle_version_comparison() {
 		fi
 	fi
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Branch Management
+# ─────────────────────────────────────────────────────────────────────────────
 
 # Handle branch creation when branch already exists
 handle_existing_branch() {
@@ -399,30 +440,33 @@ jq_transform() {
 sanitize_api_spec() {
 	local api_spec_host=$1
 
-	echo "Sanitize ${OUTPUT_FILE}:"
+	echo ""
+	echo "┌──────────────────────────────────────────────────────────────────┐"
+	echo "│ Sanitizing API Specification                                    │"
+	echo "└──────────────────────────────────────────────────────────────────┘"
 
 	# Pretty print
 	info "Pretty printing JSON..."
 	jq_transform '.'
 
 	# Sanitize host URL
-	info "Sanitize https://${api_spec_host} with https://API_HOST"
+	info "Sanitizing host URL: https://${api_spec_host} → https://API_HOST"
 	sed -i "s|https://${api_spec_host}|https://API_HOST|g" "${OUTPUT_FILE}"
 
 	# Sanitize title
-	info "Sanitize title..."
+	info "Sanitizing title..."
 	jq_transform '.info.title = "Event Configuration Handler"'
 
 	# Sanitize description
-	info "Sanitize description"
+	info "Sanitizing description..."
 	jq_transform '.info.description = "This is the API client for the Mail Configuration API"'
 
 	# Sanitize contact
-	info "Sanitize contact"
+	info "Sanitizing contact..."
 	jq_transform '.info.contact = {}'
 
 	# Drop tags description
-	info "Drop tags description"
+	info "Removing tags description..."
 	jq_transform 'del(.tags[].description)'
 }
 
@@ -443,14 +487,17 @@ ask_regenerate_client() {
 	fi
 }
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Git Commit Workflow
+# ─────────────────────────────────────────────────────────────────────────────
+
 # Show git status with untracked files
 show_git_status() {
 	echo ""
-	echo "=========================================="
-	echo "Current Git Status:"
-	echo "=========================================="
+	echo "┌──────────────────────────────────────────────────────────────────┐"
+	echo "│ Current Git Status                                              │"
+	echo "└──────────────────────────────────────────────────────────────────┘"
 	git status --short --untracked-files=all
-	echo "=========================================="
 	echo ""
 }
 
@@ -549,9 +596,9 @@ handle_commit_workflow() {
 	local client_regenerated=$2
 
 	echo ""
-	echo "=========================================="
-	echo "Commit Workflow"
-	echo "=========================================="
+	echo "┌──────────────────────────────────────────────────────────────────┐"
+	echo "│ Commit Workflow                                                 │"
+	echo "└──────────────────────────────────────────────────────────────────┘"
 
 	# Stage changes
 	if ! stage_changes "${remote_version}"; then
@@ -638,11 +685,11 @@ main() {
 
 	# Show what would be committed
 	echo ""
-	echo "=========================================="
-	echo "Files to be committed:"
-	echo "=========================================="
+	echo "┌──────────────────────────────────────────────────────────────────┐"
+	echo "│ Files to be Committed                                           │"
+	echo "└──────────────────────────────────────────────────────────────────┘"
 	git status --short --untracked-files=all
-	echo "=========================================="
+	echo ""
 
 	# Handle commit workflow
 	echo ""
@@ -673,17 +720,19 @@ main() {
 
 	# Final message
 	echo ""
-	info "Done!"
+	echo "┌──────────────────────────────────────────────────────────────────┐"
+	echo "│ Summary                                                         │"
+	echo "└──────────────────────────────────────────────────────────────────┘"
+	info "✓ Done!"
 	if [[ "${create_branch}" == "true" ]]; then
-		info "You are on branch: ${branch_name}"
+		info "  Branch: ${branch_name}"
+	fi
+	info "  API version: ${remote_version}"
+	info "  API spec file: ${OUTPUT_FILE}"
+	if [[ "${client_regenerated}" == "true" ]]; then
+		info "  PHP client: regenerated"
 	fi
 	echo ""
-	info "Summary:"
-	info "  - API version: ${remote_version}"
-	info "  - API spec file: ${OUTPUT_FILE}"
-	if [[ "${client_regenerated}" == "true" ]]; then
-		info "  - PHP client: regenerated"
-	fi
 }
 
 main "$@"
