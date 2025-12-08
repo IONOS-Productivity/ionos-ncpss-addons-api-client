@@ -413,12 +413,154 @@ ask_regenerate_client() {
 		info "Running 'make php'..."
 		if make php; then
 			info "PHP client generation completed successfully"
+			return 0
 		else
 			die "PHP client generation failed"
 		fi
 	else
 		info "Skipping 'make php'. You can run it manually later."
+		return 1
 	fi
+}
+
+# Show git status with untracked files
+show_git_status() {
+	echo ""
+	echo "=========================================="
+	echo "Current Git Status:"
+	echo "=========================================="
+	git status --short --untracked-files=all
+	echo "=========================================="
+	echo ""
+}
+
+# Guide user through staging changes
+stage_changes() {
+	local remote_version=$1
+
+	show_git_status
+
+	echo "The following changes will be staged:"
+	echo "  - docs/*"
+	echo "  - lib/*"
+	echo "  - test/*"
+	echo "  - openapi-generator/*"
+	echo "  - .ncw-mail-configuration.json"
+	echo "  - README.md"
+	echo ""
+	echo "Note: Other files will be ignored and not staged."
+	echo ""
+
+	if ! ask_yes_no "Do you want to stage these changes?" "Y"; then
+		warn "Please stage your changes manually with 'git add <files>'"
+		return 1
+	fi
+
+	info "Staging specific files..."
+	git add docs/ lib/ test/ openapi-generator/ .ncw-mail-configuration.json README.md 2>/dev/null || true
+
+	# Show what was staged
+	echo ""
+	echo "Staged changes:"
+	git status --short
+	echo ""
+
+	return 0
+}
+
+# Create conventional commit
+create_commit() {
+	local remote_version=$1
+	local commit_msg="feat: update API client to version ${remote_version}"
+
+	echo ""
+	echo "Suggested commit message (conventional commits format):"
+	echo "  ${commit_msg}"
+	echo ""
+
+	if ask_yes_no "Do you want to use this commit message?" "Y"; then
+		# Use the suggested message
+		:
+	else
+		# Let user enter custom message
+		echo ""
+		echo "Enter your commit message (use conventional commits format):"
+		echo "Examples: feat: ..., fix: ..., docs: ..., chore: ..."
+		read -r -p "Commit message: " custom_msg
+
+		if [[ -z "${custom_msg}" ]]; then
+			warn "Empty commit message. Using default message."
+		else
+			commit_msg="${custom_msg}"
+		fi
+	fi
+
+	info "Creating commit..."
+	if git commit -m "${commit_msg}"; then
+		info "✓ Commit created successfully"
+		echo ""
+		git --no-pager log -1 --oneline
+		echo ""
+		return 0
+	else
+		warn "Failed to create commit"
+		return 1
+	fi
+}
+
+# Verify commit was created
+verify_commit() {
+	local status
+	status=$(git status --short)
+
+	if [[ -z "${status}" ]]; then
+		info "✓ All changes have been committed"
+		return 0
+	else
+		warn "Warning: There are still uncommitted changes:"
+		git status --short
+		return 1
+	fi
+}
+
+# Handle commit workflow
+handle_commit_workflow() {
+	local remote_version=$1
+	local client_regenerated=$2
+
+	echo ""
+	echo "=========================================="
+	echo "Commit Workflow"
+	echo "=========================================="
+
+	# Stage changes
+	if ! stage_changes "${remote_version}"; then
+		warn "Changes were not staged automatically."
+		echo ""
+		info "Please review and commit your changes manually:"
+		info "  1. Review changes: git status"
+		info "  2. Stage changes: git add <files> or git add -A"
+		info "  3. Commit: git commit -m 'feat: update API client to version ${remote_version}'"
+		return 1
+	fi
+
+	# Create commit
+	if ! create_commit "${remote_version}"; then
+		warn "Commit was not created."
+		echo ""
+		info "Please commit your changes manually:"
+		info "  git commit -m 'feat: update API client to version ${remote_version}'"
+		return 1
+	fi
+
+	# Verify commit
+	if ! verify_commit; then
+		warn "Some changes may not have been committed."
+		info "Please review with: git status"
+		return 1
+	fi
+
+	return 0
 }
 
 # =============================================================================
@@ -469,13 +611,58 @@ main() {
 	info "New version: ${remote_version}"
 
 	# Ask to regenerate client
-	ask_regenerate_client
+	local client_regenerated=false
+	if ask_regenerate_client; then
+		client_regenerated=true
+	fi
+
+	# Show what would be committed
+	echo ""
+	echo "=========================================="
+	echo "Files to be committed:"
+	echo "=========================================="
+	git status --short --untracked-files=all
+	echo "=========================================="
+
+	# Handle commit workflow
+	echo ""
+	if ask_yes_no "Do you want to commit these changes now?" "Y"; then
+		if handle_commit_workflow "${remote_version}" "${client_regenerated}"; then
+			info "✓ Changes committed successfully"
+
+			# Offer to push
+			echo ""
+			if [[ "${create_branch}" == "true" ]]; then
+				if ask_yes_no "Do you want to push branch '${branch_name}' to remote?" "N"; then
+					info "Pushing to remote..."
+					if git push -u origin "${branch_name}"; then
+						info "✓ Branch pushed successfully"
+					else
+						warn "Failed to push branch. You can push manually with:"
+						warn "  git push -u origin ${branch_name}"
+					fi
+				fi
+			fi
+		else
+			warn "Commit workflow incomplete. Please review and commit manually."
+		fi
+	else
+		warn "Changes not committed."
+		show_git_status
+	fi
 
 	# Final message
 	echo ""
-	info "Done! Don't forget to review and commit your changes."
+	info "Done!"
 	if [[ "${create_branch}" == "true" ]]; then
-		info "You are now on branch: ${branch_name}"
+		info "You are on branch: ${branch_name}"
+	fi
+	echo ""
+	info "Summary:"
+	info "  - API version: ${remote_version}"
+	info "  - API spec file: ${OUTPUT_FILE}"
+	if [[ "${client_regenerated}" == "true" ]]; then
+		info "  - PHP client: regenerated"
 	fi
 }
 
