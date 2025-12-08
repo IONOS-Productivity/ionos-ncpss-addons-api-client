@@ -340,8 +340,18 @@ prompt_for_branch_name() {
 		else
 			# Branch name is valid and doesn't exist
 			branch_name="${new_name}"
-			info "Creating new branch: ${branch_name}"
-			git checkout -b "${branch_name}" || die "Failed to create branch"
+			info "Creating new branch from latest origin/main: ${branch_name}"
+
+			# Ensure we're creating from latest origin/main
+			if ! git checkout origin/main; then
+				die "Failed to checkout origin/main"
+			fi
+
+			if ! git checkout -b "${branch_name}"; then
+				die "Failed to create branch"
+			fi
+
+			info "✓ Branch '${branch_name}' created from origin/main"
 			break
 		fi
 	done
@@ -363,8 +373,18 @@ create_update_branch() {
 	if [[ ${branch_exists_local} -gt 0 || ${branch_exists_remote} -gt 0 ]]; then
 		handle_existing_branch "${branch_name}"
 	else
-		info "Creating new branch: ${branch_name}"
-		git checkout -b "${branch_name}" || die "Failed to create branch"
+		info "Creating new branch from latest origin/main: ${branch_name}"
+
+		# Ensure we're creating from latest origin/main
+		if ! git checkout origin/main; then
+			die "Failed to checkout origin/main"
+		fi
+
+		if ! git checkout -b "${branch_name}"; then
+			die "Failed to create branch"
+		fi
+
+		info "✓ Branch '${branch_name}' created from origin/main"
 	fi
 }
 
