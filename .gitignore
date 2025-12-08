@@ -1,19 +1,46 @@
 # ref: https://github.com/github/gitignore/blob/master/Composer.gitignore
 
+# Composer
 composer.phar
 /vendor/
+/vendor-bin/*/vendor/
 
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
 
-# php-cs-fixer cache
+# Node.js
+node_modules/
+
+# PHP tooling cache
 .php_cs.cache
 .php-cs-fixer.cache
-
-# PHPUnit cache
 .phpunit.result.cache
 
+# OpenAPI Generator
+.openapi-generator/
+
+# IDE - JetBrains
+.idea/
 
 # Personal Copilot instructions (see .github/copilot-instructions.md)
 .github/copilot-instructions.local.md
+
+# Local configuration files
+*.local.json
+
+# Environment files (following project standards)
+.env
+.env.local
+.env.secret
+.env.*.local
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
