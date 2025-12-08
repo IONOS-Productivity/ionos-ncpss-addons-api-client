@@ -269,8 +269,9 @@ handle_version_comparison() {
 	if [[ "${origin_version}" != "${remote_version}" ]]; then
 		echo ""
 		echo "Remote version (${remote_version}) is different from origin/main (${origin_version:-none})"
+		echo ""
 
-		if ask_yes_no "Do you want to create a new branch for this update?" "Y"; then
+		if ask_yes_no "Do you want to create a new branch from origin/main for this update?" "Y"; then
 			create_branch=true
 			branch_name=$(generate_branch_name "${remote_version}")
 		fi
