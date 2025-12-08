@@ -1,0 +1,79 @@
+<!--
+SPDX-FileCopyrightText: 2025 STRATO GmbH
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+# Personal Copilot Instructions (Template)
+
+This is a template for your personal Copilot instructions. Copy this file to
+`.github/copilot-instructions.local.md` to create your own preferences.
+
+```bash
+cp .github/copilot-instructions.local.md.example .github/copilot-instructions.local.md
+```
+
+The `.local.md` file is gitignored and won't be committed, so you can customize
+it however you like. These instructions will be **combined** with the project-wide
+instructions in `copilot-instructions.md`.
+
+---
+
+## Personal Preferences
+
+### Code Style
+
+Example: Add your preferred code style variations that don't conflict with project standards:
+
+```
+- When writing Python, prefer list comprehensions over map/filter
+- Use f-strings instead of .format() in Python
+- Prefer explicit error messages over generic ones
+```
+
+### Editor/IDE Specific
+
+Example: Add instructions specific to your editor setup:
+
+```
+- I use vim keybindings, so prefer showing shortcuts for vim mode
+- I have X plugin installed, so you can reference its features
+```
+
+### Workflow Preferences
+
+Example: Add your personal workflow preferences:
+
+```
+- When debugging, always add logging statements before suggesting debugger
+- Prefer verbose variable names over short ones in my code
+- When suggesting refactors, explain the trade-offs
+```
+
+### Personal Context
+
+Example: Add context about what you're working on:
+
+```
+- I'm currently focusing on the Keycloak integration
+- I'm learning about OIDC, so explain security concepts when relevant
+- I prefer step-by-step explanations for complex topics
+```
+
+### Communication Style
+
+Example: Customize how Copilot communicates with you:
+
+```
+- Be concise, I prefer brief explanations
+- Use analogies when explaining complex concepts
+- Always show examples alongside explanations
+```
+
+---
+
+## Tips
+
+- Keep it focused on preferences, not project requirements
+- Don't contradict project-wide standards in `copilot-instructions.md`
+- Update this file as your needs change
+- Share useful patterns with the team (they might belong in project instructions)

@@ -13,3 +13,7 @@ composer.phar
 
 # PHPUnit cache
 .phpunit.result.cache
+
+
+# Personal Copilot instructions (see .github/copilot-instructions.md)
+.github/copilot-instructions.local.md
