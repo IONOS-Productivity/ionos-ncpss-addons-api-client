@@ -107,7 +107,10 @@ use PHPUnit\Framework\TestCase;
     {
         // Mock successful response
         {{#returnType}}
-        $responseBody = {{#isContainer}}'[{"example": "data"}]'{{/isContainer}}{{^isContainer}}{{#isString}}'{"message": "success"}'{{/isString}}{{#isPrimitiveType}}'"test"'{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isString}}'{"example": "data"}'{{/isString}}{{/isPrimitiveType}}{{/isContainer}};
+        {{! Check if any response has an array dataType by looking for [] suffix }}
+        {{#responses}}{{#-first}}{{#dataType}}{{#isArray}}$responseBody = '[{"example": "data"}]';{{/isArray}}{{^isArray}}{{#isString}}$responseBody = '{"message": "success"}';{{/isString}}{{#isPrimitiveType}}$responseBody = '"test"';{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isString}}$responseBody = '{"example": "data"}';{{/isString}}{{/isPrimitiveType}}{{/isArray}}{{/dataType}}{{/-first}}{{/responses}}
+        {{! Fallback to original logic if responses don't work }}
+        {{^responses}}$responseBody = {{#isContainer}}'[{"example": "data"}]'{{/isContainer}}{{^isContainer}}{{#isString}}'{"message": "success"}'{{/isString}}{{#isPrimitiveType}}'"test"'{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isString}}'{"example": "data"}'{{/isString}}{{/isPrimitiveType}}{{/isContainer}};{{/responses}}
         {{/returnType}}
         {{^returnType}}
         $responseBody = '';
@@ -143,9 +146,13 @@ use PHPUnit\Framework\TestCase;
 
         // Verify the result
         $this->assertNotNull($result);
-        {{#isContainer}}
+        {{#responses}}{{#-first}}{{#dataType}}{{#isArray}}
         $this->assertIsArray($result);
-        {{/isContainer}}
+        {{/isArray}}{{/dataType}}{{/-first}}{{/responses}}
+        {{! Fallback to original }}
+        {{^responses}}{{#isContainer}}
+        $this->assertIsArray($result);
+        {{/isContainer}}{{/responses}}
         {{#isString}}
         $this->assertIsString($result);
         {{/isString}}
@@ -168,7 +175,10 @@ use PHPUnit\Framework\TestCase;
     {
         // Mock successful response
         {{#returnType}}
-        $responseBody = {{#isContainer}}'[{"example": "data"}]'{{/isContainer}}{{^isContainer}}{{#isString}}'{"message": "success"}'{{/isString}}{{#isPrimitiveType}}'"test"'{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isString}}'{"example": "data"}'{{/isString}}{{/isPrimitiveType}}{{/isContainer}};
+        {{! Check if any response has an array dataType by looking for [] suffix }}
+        {{#responses}}{{#-first}}{{#dataType}}{{#isArray}}$responseBody = '[{"example": "data"}]';{{/isArray}}{{^isArray}}{{#isString}}$responseBody = '{"message": "success"}';{{/isString}}{{#isPrimitiveType}}$responseBody = '"test"';{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isString}}$responseBody = '{"example": "data"}';{{/isString}}{{/isPrimitiveType}}{{/isArray}}{{/dataType}}{{/-first}}{{/responses}}
+        {{! Fallback to original logic if responses don't work }}
+        {{^responses}}$responseBody = {{#isContainer}}'[{"example": "data"}]'{{/isContainer}}{{^isContainer}}{{#isString}}'{"message": "success"}'{{/isString}}{{#isPrimitiveType}}'"test"'{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isString}}'{"example": "data"}'{{/isString}}{{/isPrimitiveType}}{{/isContainer}};{{/responses}}
         {{/returnType}}
         {{^returnType}}
         $responseBody = '';
