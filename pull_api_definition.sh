@@ -21,6 +21,7 @@ readonly API_PATH="/nextcloud/api-docs/Addon%20API"
 temp_file=""
 create_branch=false
 branch_name=""
+base_branch="main"
 
 # =============================================================================
 # Utility Functions
@@ -116,14 +117,18 @@ show_help() {
 		└──────────────────────────────────────────────────────────────────┘
 
 		USAGE:
-		  ./pull_api_definition.sh <host>
+		  ./pull_api_definition.sh <host> [base_branch]
 
 		ARGUMENTS:
-		  host    The host where the API spec is hosted (including port if needed)
+		  host         The host where the API spec is hosted (including port if needed)
+		  base_branch  The base branch to use (default: main)
 
 		EXAMPLES:
 		  # Update from a specific API host
 		  ./pull_api_definition.sh api.example.lan:10443
+
+		  # Use a different base branch
+		  ./pull_api_definition.sh api.example.lan:10443 mk/dev/some_other_base_branch
 
 		  # With authentication
 		  export API_SPEC_USER=<user> API_SPEC_PASSWORD=<pass>
@@ -165,6 +170,12 @@ parse_args() {
 		show_help
 		exit 1
 	fi
+
+	# Set base_branch if provided as second argument
+	if [[ $# -ge 2 ]]; then
+		base_branch="$2"
+		info "Using base branch: ${base_branch}"
+	fi
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -180,18 +191,18 @@ get_local_version() {
 	fi
 }
 
-# Get API version from origin/main
+# Get API version from origin/${base_branch}
 get_origin_version() {
 	local version=""
 
 	# Try to get version from git remote first
-	if git cat-file -e origin/main:"${OUTPUT_FILE}" 2>/dev/null; then
-		version=$(git show --no-pager origin/main:"${OUTPUT_FILE}" 2>/dev/null | jq -r '.info.version' 2>/dev/null || echo "")
+	if git cat-file -e "origin/${base_branch}:${OUTPUT_FILE}" 2>/dev/null; then
+		version=$(git show --no-pager "origin/${base_branch}:${OUTPUT_FILE}" 2>/dev/null | jq -r '.info.version' 2>/dev/null || echo "")
 	fi
 
 	# If git didn't work or returned empty, fallback to fetching from GitHub repository
 	if [[ -z "${version}" || "${version}" == "null" ]]; then
-		local github_url="https://raw.githubusercontent.com/IONOS-Productivity/ionos-mail-configuration-api-client/refs/heads/main/${OUTPUT_FILE}"
+		local github_url="https://raw.githubusercontent.com/IONOS-Productivity/ionos-mail-configuration-api-client/refs/heads/${base_branch}/${OUTPUT_FILE}"
 		version=$(curl -sf "${github_url}" 2>/dev/null | jq -r '.info.version' 2>/dev/null || echo "")
 	fi
 
@@ -218,7 +229,7 @@ display_versions() {
 	local origin_version=$2
 
 	info "Current local version: ${current_version:-none}"
-	info "Origin/main version: ${origin_version:-none}"
+	info "Origin/${base_branch} version: ${origin_version:-none}"
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -268,10 +279,10 @@ handle_version_comparison() {
 
 	if [[ "${origin_version}" != "${remote_version}" ]]; then
 		echo ""
-		echo "Remote version (${remote_version}) is different from origin/main (${origin_version:-none})"
+		echo "Remote version (${remote_version}) is different from origin/${base_branch} (${origin_version:-none})"
 		echo ""
 
-		if ask_yes_no "Do you want to create a new branch from origin/main for this update?" "Y"; then
+		if ask_yes_no "Do you want to create a new branch from origin/${base_branch} for this update?" "Y"; then
 			create_branch=true
 			branch_name=$(generate_branch_name "${remote_version}")
 		fi
@@ -382,18 +393,18 @@ prompt_for_branch_name() {
 		else
 			# Branch name is valid and doesn't exist
 			branch_name="${new_name}"
-			info "Creating new branch from latest origin/main: ${branch_name}"
+			info "Creating new branch from latest origin/${base_branch}: ${branch_name}"
 
-			# Ensure we're creating from latest origin/main
-			if ! git checkout origin/main; then
-				die "Failed to checkout origin/main"
+			# Ensure we're creating from latest origin/base_branch
+			if ! git checkout "origin/${base_branch}"; then
+				die "Failed to checkout origin/${base_branch}"
 			fi
 
 			if ! git checkout -b "${branch_name}"; then
 				die "Failed to create branch"
 			fi
 
-			info "✓ Branch '${branch_name}' created from origin/main"
+			info "✓ Branch '${branch_name}' created from origin/${base_branch}"
 			break
 		fi
 	done
@@ -415,18 +426,18 @@ create_update_branch() {
 	if [[ ${branch_exists_local} -gt 0 || ${branch_exists_remote} -gt 0 ]]; then
 		handle_existing_branch "${branch_name}"
 	else
-		info "Creating new branch from latest origin/main: ${branch_name}"
+		info "Creating new branch from latest origin/${base_branch}: ${branch_name}"
 
-		# Ensure we're creating from latest origin/main
-		if ! git checkout origin/main; then
-			die "Failed to checkout origin/main"
+		# Ensure we're creating from latest origin/base_branch
+		if ! git checkout "origin/${base_branch}"; then
+			die "Failed to checkout origin/${base_branch}"
 		fi
 
 		if ! git checkout -b "${branch_name}"; then
 			die "Failed to create branch"
 		fi
 
-		info "✓ Branch '${branch_name}' created from origin/main"
+		info "✓ Branch '${branch_name}' created from origin/${base_branch}"
 	fi
 }
 
