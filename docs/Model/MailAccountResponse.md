@@ -1,4 +1,4 @@
-# # MailAccountResponse
+# MailAccountResponse
 
 ## Properties
 

@@ -8,7 +8,7 @@ All URIs are relative to https://API_HOST/nextcloud, except if the operation def
 | [**deleteAppPassword()**](MailConfigurationAPIApi.md#deleteAppPassword) | **DELETE** /addons/{brand}/{extRef}/mail/{nextcloudUserId}/apppwd/{appname} | Deletes the app credentials for the given appname |
 | [**deleteMailbox()**](MailConfigurationAPIApi.md#deleteMailbox) | **DELETE** /addons/{brand}/{extRef}/mail/{nextcloudUserId} | Deletes mailbox for given nextcloud user |
 | [**getAllFunctionalAccounts()**](MailConfigurationAPIApi.md#getAllFunctionalAccounts) | **GET** /addons/{brand}/{extRef}/mail | Returns all functional mailboxes for the given brand and extRef |
-| [**getFunctionalAccount()**](MailConfigurationAPIApi.md#getFunctionalAccount) | **GET** /addons/{brand}/{extRef}/mail/{nextcloudUserId} | Returns all functional mailboxes for the given brand and extRef |
+| [**getFunctionalAccount()**](MailConfigurationAPIApi.md#getFunctionalAccount) | **GET** /addons/{brand}/{extRef}/mail/{nextcloudUserId} | Returns all functional mailboxes for the given brand and extRef and nextcloudUserId |
 | [**patchMailbox()**](MailConfigurationAPIApi.md#patchMailbox) | **PATCH** /addons/{brand}/{extRef}/mail/{nextcloudUserId} | update maildata |
 | [**setAppPassword()**](MailConfigurationAPIApi.md#setAppPassword) | **POST** /addons/{brand}/{extRef}/mail/{nextcloudUserId}/apppwd/{appname} | A new password for provided appname will be set and returned |
 
@@ -211,7 +211,7 @@ void (empty response body)
 ## `getAllFunctionalAccounts()`
 
 ```php
-getAllFunctionalAccounts($brand, $extRef): \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse
+getAllFunctionalAccounts($brand, $extRef): \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]
 ```
 
 Returns all functional mailboxes for the given brand and extRef
@@ -256,7 +256,7 @@ try {
 
 ### Return type
 
-[**\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse**](../Model/MailAccountResponse.md)
+[**\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]**](../Model/MailAccountResponse.md)
 
 ### Authorization
 
@@ -277,7 +277,7 @@ try {
 getFunctionalAccount($brand, $extRef, $nextcloudUserId): \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse
 ```
 
-Returns all functional mailboxes for the given brand and extRef
+Returns all functional mailboxes for the given brand and extRef and nextcloudUserId
 
 ### Example
 

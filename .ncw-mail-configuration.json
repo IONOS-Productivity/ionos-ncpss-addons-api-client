@@ -4,7 +4,7 @@
     "title": "Event Configuration Handler",
     "description": "This is the API client for the Mail Configuration API",
     "contact": {},
-    "version": "2.0.0-20251208083401"
+    "version": "2.0.0-20260210132735"
   },
   "servers": [
     {
@@ -38,7 +38,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "IONOS"
+                "IONOS",
+                "IONOSCLOUD"
               ]
             }
           },
@@ -57,7 +58,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MailAccountResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MailAccountResponse"
+                  }
                 }
               }
             }
@@ -128,7 +132,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "IONOS"
+                "IONOS",
+                "IONOSCLOUD"
               ]
             }
           },
@@ -230,7 +235,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "IONOS"
+                "IONOS",
+                "IONOSCLOUD"
               ]
             }
           },
@@ -342,7 +348,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "IONOS"
+                "IONOS",
+                "IONOSCLOUD"
               ]
             }
           },
@@ -438,7 +445,7 @@
         "tags": [
           "MailConfigurationAPI"
         ],
-        "summary": "Returns all functional mailboxes for the given brand and extRef",
+        "summary": "Returns all functional mailboxes for the given brand and extRef and nextcloudUserId",
         "operationId": "getFunctionalAccount",
         "parameters": [
           {
@@ -448,7 +455,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "IONOS"
+                "IONOS",
+                "IONOSCLOUD"
               ]
             }
           },
@@ -546,7 +554,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "IONOS"
+                "IONOS",
+                "IONOSCLOUD"
               ]
             }
           },
@@ -637,7 +646,8 @@
             "schema": {
               "type": "string",
               "enum": [
-                "IONOS"
+                "IONOS",
+                "IONOSCLOUD"
               ]
             }
           },
@@ -749,18 +759,25 @@
           "nextcloudUserId"
         ]
       },
-      "Imap": {
+      "ImapConfig": {
         "type": "object",
+        "description": "Imap server configuration.",
         "properties": {
           "host": {
-            "type": "string"
+            "type": "string",
+            "description": "imap host",
+            "example": "imap.ionos.de"
           },
           "port": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "imap port",
+            "example": 993
           },
           "sslMode": {
-            "type": "string"
+            "type": "string",
+            "description": "SSL mode",
+            "example": "SSL"
           }
         }
       },
@@ -799,25 +816,32 @@
         "type": "object",
         "properties": {
           "imap": {
-            "$ref": "#/components/schemas/Imap"
+            "$ref": "#/components/schemas/ImapConfig"
           },
           "smtp": {
-            "$ref": "#/components/schemas/Smtp"
+            "$ref": "#/components/schemas/SmtpConfig"
           }
         }
       },
-      "Smtp": {
+      "SmtpConfig": {
         "type": "object",
+        "description": "SMTP server configuration.",
         "properties": {
           "host": {
-            "type": "string"
+            "type": "string",
+            "description": "smtp host",
+            "example": "smtp.ionos.de"
           },
           "port": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "smtp port",
+            "example": 465
           },
           "sslMode": {
-            "type": "string"
+            "type": "string",
+            "description": "SSL mode",
+            "example": "SSL"
           }
         }
       },
@@ -936,6 +960,7 @@
       },
       "MailAccountResponse": {
         "type": "object",
+        "description": "Response containing details of the created mail account.",
         "properties": {
           "email": {
             "type": "string",
@@ -949,14 +974,7 @@
           },
           "server": {
             "$ref": "#/components/schemas/MailServer",
-            "description": "The configuration for smtp and imap servers.",
-            "example": {
-              "smtpServer": "smtp.example.com",
-              "smtpPort": 587,
-              "imapServer": "imap.example.com",
-              "imapPort": 993,
-              "useSsl": true
-            }
+            "description": "The configuration for smtp and imap servers."
           }
         }
       }

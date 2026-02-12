@@ -1,4 +1,4 @@
-# # PatchMailRequest
+# PatchMailRequest
 
 ## Properties
 

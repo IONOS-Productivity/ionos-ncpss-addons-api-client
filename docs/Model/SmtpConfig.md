@@ -1,11 +1,11 @@
-# MailAddonErrorMessage
+# SmtpConfig
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **string** |  | [optional]
-**message** | **string** |  | [optional]
-**requestId** | **string** |  | [optional]
+**host** | **string** | smtp host | [optional]
+**port** | **int** | smtp port | [optional]
+**sslMode** | **string** | SSL mode | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
