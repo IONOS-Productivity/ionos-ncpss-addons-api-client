@@ -42,7 +42,7 @@ generate_php_client: check_dependencies ## Generate PHP client from OpenAPI spec
 		-g php \
 		-o . \
 		--global-property apiTests=true,modelTests=false \
-		--additional-properties=httpUserAgent=ionos-mail-configuration-api-client/$(VERSION)/PHP \
+		--additional-properties=httpUserAgent=ionos-ncpss-addons-api-client/$(VERSION)/PHP \
 		-c $(GENERATOR_CONFIG)
 	@echo "PHP client generation completed."
 

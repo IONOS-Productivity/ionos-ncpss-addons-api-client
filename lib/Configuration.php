@@ -109,7 +109,7 @@ class Configuration
      *
      * @var string
      */
-    protected $userAgent = 'ionos-mail-configuration-api-client/2.0.0-20260210132735/PHP';
+    protected $userAgent = 'ionos-ncpss-addons-api-client/2.0.0-20260210132735/PHP';
 
     /**
      * Debug switch (default set to false)

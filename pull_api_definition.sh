@@ -202,7 +202,7 @@ get_origin_version() {
 
 	# If git didn't work or returned empty, fallback to fetching from GitHub repository
 	if [[ -z "${version}" || "${version}" == "null" ]]; then
-		local github_url="https://raw.githubusercontent.com/IONOS-Productivity/ionos-mail-configuration-api-client/refs/heads/${base_branch}/${OUTPUT_FILE}"
+		local github_url="https://raw.githubusercontent.com/IONOS-Productivity/ionos-ncpss-addons-api-client/refs/heads/${base_branch}/${OUTPUT_FILE}"
 		version=$(curl -sf "${github_url}" 2>/dev/null | jq -r '.info.version' 2>/dev/null || echo "")
 	fi
 
