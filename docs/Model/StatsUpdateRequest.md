@@ -1,11 +1,10 @@
-# ErrorMessage
+# StatsUpdateRequest
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **string** |  | [optional]
-**message** | **string** |  | [optional]
-**requestId** | **string** |  | [optional]
+**timestamp** | **\DateTime** |  |
+**users** | [**\IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats**](UserStats.md) |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

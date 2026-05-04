@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MailAddonErrorMessage
+ * ErrorMessage
  *
  * PHP version 8.1
  *
@@ -41,7 +41,7 @@ use \ArrayAccess;
 use \IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
 
 /**
- * MailAddonErrorMessage Class Doc Comment
+ * ErrorMessage Class Doc Comment
  *
  * @category Class
  * @package  IONOS\NextcloudPSS\AddonsAPI\Client
@@ -49,7 +49,7 @@ use \IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class MailAddonErrorMessage implements ModelInterface, ArrayAccess, \JsonSerializable
+class ErrorMessage implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -58,7 +58,7 @@ class MailAddonErrorMessage implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'MailAddonErrorMessage';
+    protected static $openAPIModelName = 'ErrorMessage';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
