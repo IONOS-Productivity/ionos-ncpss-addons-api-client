@@ -5,7 +5,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 # IONOSNextcloudPSSAddonsHandler
 
-This is the API client for the Mail Configuration API
+PHP API client for the IONOS Nextcloud PSS Addons API
 
 
 ## Installation & Usage

@@ -1,6 +1,6 @@
 {
     "name": "ionos-productivity/ionos-ncpss-addons-api-client",
-    "description": "This is the API client for the Mail Configuration API",
+    "description": "PHP API client for the IONOS Nextcloud PSS Addons API",
     "keywords": [
         "openapitools",
         "openapi-generator",
