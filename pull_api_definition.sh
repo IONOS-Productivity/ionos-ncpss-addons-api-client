@@ -467,11 +467,11 @@ sanitize_api_spec() {
 
 	# Sanitize title
 	info "Sanitizing title..."
-	jq_transform '.info.title = "Event Configuration Handler"'
+	jq_transform '.info.title = "IONOS Nextcloud PSS Addons API"'
 
 	# Sanitize description
 	info "Sanitizing description..."
-	jq_transform '.info.description = "This is the API client for the Nextcloud PSS Addon API"'
+	jq_transform '.info.description = "PHP API client for the IONOS Nextcloud PSS Addons API"'
 
 	# Sanitize contact
 	info "Sanitizing contact..."
