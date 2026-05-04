@@ -5,7 +5,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -34,14 +34,14 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client;
 
 /**
  * Configuration Class Doc Comment
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -438,7 +438,7 @@ class Configuration
      */
     public static function toDebugReport()
     {
-        $report  = 'PHP SDK (IONOS\MailConfigurationAPI\Client) Debug Report:' . PHP_EOL;
+        $report  = 'PHP SDK (IONOS\NextcloudPSS\AddonsAPI\Client) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    The version of the OpenAPI document: 2.0.0-20260210132735' . PHP_EOL;

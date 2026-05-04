@@ -5,7 +5,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -34,7 +34,7 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client\Api;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -45,17 +45,17 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use IONOS\MailConfigurationAPI\Client\ApiException;
-use IONOS\MailConfigurationAPI\Client\Configuration;
-use IONOS\MailConfigurationAPI\Client\FormDataProcessor;
-use IONOS\MailConfigurationAPI\Client\HeaderSelector;
-use IONOS\MailConfigurationAPI\Client\ObjectSerializer;
+use IONOS\NextcloudPSS\AddonsAPI\Client\ApiException;
+use IONOS\NextcloudPSS\AddonsAPI\Client\Configuration;
+use IONOS\NextcloudPSS\AddonsAPI\Client\FormDataProcessor;
+use IONOS\NextcloudPSS\AddonsAPI\Client\HeaderSelector;
+use IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
 
 /**
  * MailConfigurationAPIApi Class Doc Comment
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -159,12 +159,12 @@ class MailConfigurationAPIApi
      *
      * @param  string $brand brand (required)
      * @param  string $extRef extRef (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\MailCreateData $mailCreateData mailCreateData (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData $mailCreateData mailCreateData (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createMailbox'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage
+     * @return \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountCreatedResponse|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage
      */
     public function createMailbox($brand, $extRef, $mailCreateData, string $contentType = self::contentTypes['createMailbox'][0])
     {
@@ -179,12 +179,12 @@ class MailConfigurationAPIApi
      *
      * @param  string $brand (required)
      * @param  string $extRef (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\MailCreateData $mailCreateData (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData $mailCreateData (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createMailbox'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountCreatedResponse|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage, HTTP status code, HTTP response headers (array of strings)
      */
     public function createMailboxWithHttpInfo($brand, $extRef, $mailCreateData, string $contentType = self::contentTypes['createMailbox'][0])
     {
@@ -216,37 +216,37 @@ class MailConfigurationAPIApi
             switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountCreatedResponse',
                         $request,
                         $response,
                     );
                 case 404:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 409:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 412:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 400:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 500:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
@@ -268,7 +268,7 @@ class MailConfigurationAPIApi
             }
 
             return $this->handleResponseWithDataType(
-                '\IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse',
+                '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountCreatedResponse',
                 $request,
                 $response,
             );
@@ -277,7 +277,7 @@ class MailConfigurationAPIApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountCreatedResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -285,7 +285,7 @@ class MailConfigurationAPIApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -293,7 +293,7 @@ class MailConfigurationAPIApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -301,7 +301,7 @@ class MailConfigurationAPIApi
                 case 412:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -309,7 +309,7 @@ class MailConfigurationAPIApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -317,7 +317,7 @@ class MailConfigurationAPIApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -336,7 +336,7 @@ class MailConfigurationAPIApi
      *
      * @param  string $brand (required)
      * @param  string $extRef (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\MailCreateData $mailCreateData (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData $mailCreateData (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createMailbox'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -359,7 +359,7 @@ class MailConfigurationAPIApi
      *
      * @param  string $brand (required)
      * @param  string $extRef (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\MailCreateData $mailCreateData (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData $mailCreateData (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createMailbox'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -367,7 +367,7 @@ class MailConfigurationAPIApi
      */
     public function createMailboxAsyncWithHttpInfo($brand, $extRef, $mailCreateData, string $contentType = self::contentTypes['createMailbox'][0])
     {
-        $returnType = '\IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse';
+        $returnType = '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountCreatedResponse';
         $request = $this->createMailboxRequest($brand, $extRef, $mailCreateData, $contentType);
 
         return $this->client
@@ -411,7 +411,7 @@ class MailConfigurationAPIApi
      *
      * @param  string $brand (required)
      * @param  string $extRef (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\MailCreateData $mailCreateData (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData $mailCreateData (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createMailbox'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -544,7 +544,7 @@ class MailConfigurationAPIApi
      * @param  string $appname appname (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppPassword'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -564,7 +564,7 @@ class MailConfigurationAPIApi
      * @param  string $appname (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteAppPassword'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -601,7 +601,7 @@ class MailConfigurationAPIApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -609,7 +609,7 @@ class MailConfigurationAPIApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -617,7 +617,7 @@ class MailConfigurationAPIApi
                 case 412:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -625,7 +625,7 @@ class MailConfigurationAPIApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -633,7 +633,7 @@ class MailConfigurationAPIApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -865,7 +865,7 @@ class MailConfigurationAPIApi
      * @param  string $nextcloudUserId nextcloudUserId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteMailbox'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -884,7 +884,7 @@ class MailConfigurationAPIApi
      * @param  string $nextcloudUserId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['deleteMailbox'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -921,7 +921,7 @@ class MailConfigurationAPIApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -929,7 +929,7 @@ class MailConfigurationAPIApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -937,7 +937,7 @@ class MailConfigurationAPIApi
                 case 412:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -945,7 +945,7 @@ class MailConfigurationAPIApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -953,7 +953,7 @@ class MailConfigurationAPIApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1166,9 +1166,9 @@ class MailConfigurationAPIApi
      * @param  string $extRef extRef (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllFunctionalAccounts'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage
+     * @return \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse[]|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage
      */
     public function getAllFunctionalAccounts($brand, $extRef, string $contentType = self::contentTypes['getAllFunctionalAccounts'][0])
     {
@@ -1185,9 +1185,9 @@ class MailConfigurationAPIApi
      * @param  string $extRef (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getAllFunctionalAccounts'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse[]|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAllFunctionalAccountsWithHttpInfo($brand, $extRef, string $contentType = self::contentTypes['getAllFunctionalAccounts'][0])
     {
@@ -1219,37 +1219,37 @@ class MailConfigurationAPIApi
             switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse[]',
                         $request,
                         $response,
                     );
                 case 404:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 409:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 412:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 400:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 500:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
@@ -1271,7 +1271,7 @@ class MailConfigurationAPIApi
             }
 
             return $this->handleResponseWithDataType(
-                '\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]',
+                '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse[]',
                 $request,
                 $response,
             );
@@ -1280,7 +1280,7 @@ class MailConfigurationAPIApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1288,7 +1288,7 @@ class MailConfigurationAPIApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1296,7 +1296,7 @@ class MailConfigurationAPIApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1304,7 +1304,7 @@ class MailConfigurationAPIApi
                 case 412:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1312,7 +1312,7 @@ class MailConfigurationAPIApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1320,7 +1320,7 @@ class MailConfigurationAPIApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1368,7 +1368,7 @@ class MailConfigurationAPIApi
      */
     public function getAllFunctionalAccountsAsyncWithHttpInfo($brand, $extRef, string $contentType = self::contentTypes['getAllFunctionalAccounts'][0])
     {
-        $returnType = '\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]';
+        $returnType = '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse[]';
         $request = $this->getAllFunctionalAccountsRequest($brand, $extRef, $contentType);
 
         return $this->client
@@ -1529,9 +1529,9 @@ class MailConfigurationAPIApi
      * @param  string $nextcloudUserId nextcloudUserId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFunctionalAccount'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage
+     * @return \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage
      */
     public function getFunctionalAccount($brand, $extRef, $nextcloudUserId, string $contentType = self::contentTypes['getFunctionalAccount'][0])
     {
@@ -1549,9 +1549,9 @@ class MailConfigurationAPIApi
      * @param  string $nextcloudUserId (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getFunctionalAccount'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage, HTTP status code, HTTP response headers (array of strings)
      */
     public function getFunctionalAccountWithHttpInfo($brand, $extRef, $nextcloudUserId, string $contentType = self::contentTypes['getFunctionalAccount'][0])
     {
@@ -1583,37 +1583,37 @@ class MailConfigurationAPIApi
             switch ($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse',
                         $request,
                         $response,
                     );
                 case 404:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 409:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 412:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 400:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 500:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
@@ -1635,7 +1635,7 @@ class MailConfigurationAPIApi
             }
 
             return $this->handleResponseWithDataType(
-                '\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse',
+                '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse',
                 $request,
                 $response,
             );
@@ -1644,7 +1644,7 @@ class MailConfigurationAPIApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1652,7 +1652,7 @@ class MailConfigurationAPIApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1660,7 +1660,7 @@ class MailConfigurationAPIApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1668,7 +1668,7 @@ class MailConfigurationAPIApi
                 case 412:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1676,7 +1676,7 @@ class MailConfigurationAPIApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1684,7 +1684,7 @@ class MailConfigurationAPIApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1734,7 +1734,7 @@ class MailConfigurationAPIApi
      */
     public function getFunctionalAccountAsyncWithHttpInfo($brand, $extRef, $nextcloudUserId, string $contentType = self::contentTypes['getFunctionalAccount'][0])
     {
-        $returnType = '\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse';
+        $returnType = '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse';
         $request = $this->getFunctionalAccountRequest($brand, $extRef, $nextcloudUserId, $contentType);
 
         return $this->client
@@ -1909,10 +1909,10 @@ class MailConfigurationAPIApi
      * @param  string $brand brand (required)
      * @param  string $extRef extRef (required)
      * @param  string $nextcloudUserId nextcloudUserId (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest $patchMailRequest patchMailRequest (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest $patchMailRequest patchMailRequest (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchMailbox'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -1929,10 +1929,10 @@ class MailConfigurationAPIApi
      * @param  string $brand (required)
      * @param  string $extRef (required)
      * @param  string $nextcloudUserId (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest $patchMailRequest (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest $patchMailRequest (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchMailbox'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -1969,7 +1969,7 @@ class MailConfigurationAPIApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1977,7 +1977,7 @@ class MailConfigurationAPIApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1985,7 +1985,7 @@ class MailConfigurationAPIApi
                 case 412:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1993,7 +1993,7 @@ class MailConfigurationAPIApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2001,7 +2001,7 @@ class MailConfigurationAPIApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2021,7 +2021,7 @@ class MailConfigurationAPIApi
      * @param  string $brand (required)
      * @param  string $extRef (required)
      * @param  string $nextcloudUserId (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest $patchMailRequest (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest $patchMailRequest (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchMailbox'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2045,7 +2045,7 @@ class MailConfigurationAPIApi
      * @param  string $brand (required)
      * @param  string $extRef (required)
      * @param  string $nextcloudUserId (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest $patchMailRequest (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest $patchMailRequest (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchMailbox'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2085,7 +2085,7 @@ class MailConfigurationAPIApi
      * @param  string $brand (required)
      * @param  string $extRef (required)
      * @param  string $nextcloudUserId (required)
-     * @param  \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest $patchMailRequest (required)
+     * @param  \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest $patchMailRequest (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['patchMailbox'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -2233,9 +2233,9 @@ class MailConfigurationAPIApi
      * @param  string $appname app passwords are created for a specific app label  * for nextcloud we&#39;ll support two different app passwords that can be created for the mail account:  * - &#39;nextcloud_workspace&#39; for the nextcloud workspace app  * - &#39;nextcloud_workspace_user&#39; for additonal user credentials that can be used to connect to the mail account from any other mail client (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setAppPassword'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return string|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage
+     * @return string|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage
      */
     public function setAppPassword($brand, $extRef, $nextcloudUserId, $appname, string $contentType = self::contentTypes['setAppPassword'][0])
     {
@@ -2254,9 +2254,9 @@ class MailConfigurationAPIApi
      * @param  string $appname app passwords are created for a specific app label  * for nextcloud we&#39;ll support two different app passwords that can be created for the mail account:  * - &#39;nextcloud_workspace&#39; for the nextcloud workspace app  * - &#39;nextcloud_workspace_user&#39; for additonal user credentials that can be used to connect to the mail account from any other mail client (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['setAppPassword'] to see the possible values for this operation
      *
-     * @throws \IONOS\MailConfigurationAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of string|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage|\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of string|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage|\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage, HTTP status code, HTTP response headers (array of strings)
      */
     public function setAppPasswordWithHttpInfo($brand, $extRef, $nextcloudUserId, $appname, string $contentType = self::contentTypes['setAppPassword'][0])
     {
@@ -2294,31 +2294,31 @@ class MailConfigurationAPIApi
                     );
                 case 404:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 409:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 412:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 400:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
                 case 500:
                     return $this->handleResponseWithDataType(
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $request,
                         $response,
                     );
@@ -2357,7 +2357,7 @@ class MailConfigurationAPIApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2365,7 +2365,7 @@ class MailConfigurationAPIApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2373,7 +2373,7 @@ class MailConfigurationAPIApi
                 case 412:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2381,7 +2381,7 @@ class MailConfigurationAPIApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -2389,7 +2389,7 @@ class MailConfigurationAPIApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\IONOS\MailConfigurationAPI\Client\Model\MailAddonErrorMessage',
+                        '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAddonErrorMessage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

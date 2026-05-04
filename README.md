@@ -3,7 +3,7 @@ SPDX-FileCopyrightText: 2025 STRATO GmbH
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-# IONOSMailConfigurationHandler
+# IONOSNextcloudPSSAddonsHandler
 
 This is the API client for the Mail Configuration API
 
@@ -23,11 +23,11 @@ To install the bindings via [Composer](https://getcomposer.org/), add the follow
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/ionos-productivity/ionos-mail-configuration-api-client.git"
+      "url": "https://github.com/ionos-productivity/ionos-ncpss-addons-api-client.git"
     }
   ],
   "require": {
-    "ionos-productivity/ionos-mail-configuration-api-client": "*@dev"
+    "ionos-productivity/ionos-ncpss-addons-api-client": "*@dev"
   }
 }
 ```
@@ -40,7 +40,7 @@ Download the files and include `autoload.php`:
 
 ```php
 <?php
-require_once('/path/to/IONOSMailConfigurationHandler/vendor/autoload.php');
+require_once('/path/to/IONOSNextcloudPSSAddonsHandler/vendor/autoload.php');
 ```
 
 ## Getting Started
@@ -54,13 +54,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure HTTP basic authorization: basicAuth
-$config = IONOS\MailConfigurationAPI\Client\Configuration::getDefaultConfiguration()
+$config = IONOS\NextcloudPSS\AddonsAPI\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
 
-$apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi(
+$apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -68,7 +68,7 @@ $apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi
 );
 $brand = 'brand_example'; // string
 $extRef = 'extRef_example'; // string
-$mailCreateData = new \IONOS\MailConfigurationAPI\Client\Model\MailCreateData(); // \IONOS\MailConfigurationAPI\Client\Model\MailCreateData
+$mailCreateData = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData(); // \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData
 
 try {
     $result = $apiInstance->createMailbox($brand, $extRef, $mailCreateData);

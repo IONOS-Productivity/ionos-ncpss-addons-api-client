@@ -5,7 +5,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -34,7 +34,7 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client;
 
 use \Exception;
 
@@ -42,7 +42,7 @@ use \Exception;
  * ApiException Class Doc Comment
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
