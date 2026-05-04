@@ -4,12 +4,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 # Git Commit Instructions
 
-See the **Git Workflow** section in [copilot-instructions.md](./copilot-instructions.md) for comprehensive commit message guidelines.
-
-## Quick Reference
-
-- **MUST** use [Conventional Commits](https://www.conventionalcommits.org/) format
-- Structure: `<type>(<scope>): <description>`
-- Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build`, `ci`
-- Create atomic commits (one logical change per commit)
-- Explain *why*, not just *what*
+See **[AGENTS.md — Commit messages](../AGENTS.md#commit-messages)** for the canonical commit guidelines for this project (format, allowed types, atomic commit rules, pre-commit planning requirement).
