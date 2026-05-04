@@ -1,5 +1,5 @@
 version = 1
-SPDX-PackageName = "ionos-mail-configuration-api-client"
+SPDX-PackageName = "ionos-ncpss-addons-api-client"
 SPDX-PackageSupplier = "STRATO GmbH"
 SPDX-PackageDownloadLocation = "NOASSERTION"
 
