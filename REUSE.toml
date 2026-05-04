@@ -8,6 +8,7 @@ SPDX-PackageDownloadLocation = "NOASSERTION"
 path = [
     "package.json",
     "package-lock.json",
+    "openapitools.json",
     "psalm.xml",
     "composer.json",
     "composer.lock",

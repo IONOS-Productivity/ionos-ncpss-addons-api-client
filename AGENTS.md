@@ -56,7 +56,7 @@ openapi.json   OpenAPI spec — the single source of truth
 
 The generator is `openapi-generator-cli` v7.14.0 (Node.js, see `openapitools.json` and `package.json`). Generator config is at `openapi-generator/php_lang.yaml`; custom template overrides live in `openapi-generator/templates/php/`.
 
-Namespace: `IONOS\NextcloudPSS\AddonsAPIClient`
+Namespace: `IONOS\NextcloudPSS\AddonsAPI\Client`
 Composer package: `ionos-productivity/ionos-ncpss-addons-api-client`
 Minimum PHP: 8.1
 
