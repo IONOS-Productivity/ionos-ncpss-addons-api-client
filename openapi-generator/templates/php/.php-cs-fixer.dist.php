@@ -7,8 +7,6 @@
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->exclude('vendor')
-    ->exclude('test')
-    ->exclude('tests')
 ;
 
 $config = new PhpCsFixer\Config();
