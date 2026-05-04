@@ -67,6 +67,35 @@ Minimum PHP: 8.1
 - **Style rules**: edit `.php-cs-fixer.dist.php`.
 - **Static analysis config**: edit `psalm.xml`.
 
+## Updating the API from a remote server
+
+`pull_api_definition.sh` fetches the OpenAPI spec from a running server, sanitizes it,
+regenerates the PHP client, and creates a commit — all interactively.
+
+```bash
+# Standard usage
+API_SPEC_HOST=hostname:port make update
+
+# Skip SSL certificate validation (e.g. QA environments with self-signed certs)
+ALLOW_INSECURE_SSL=1 API_SPEC_HOST=hostname:port make update
+```
+
+The script will:
+1. Compare local, origin, and remote API versions
+2. Create a feature branch (`feat/api-update-{version}-{timestamp}`)
+3. Download and sanitize the spec (replaces the real host with `API_HOST`)
+4. Offer to regenerate the PHP client (`make php`)
+5. Stage relevant files and create a signed conventional commit
+6. Offer to push the branch
+
+After the PR is merged, tag the released version:
+
+```bash
+make tag
+```
+
+This creates and pushes an annotated git tag named after the API version in `openapi.json`.
+
 ## Commit messages
 
 Format: `<type>(<scope>): <description>` — scope is optional.
