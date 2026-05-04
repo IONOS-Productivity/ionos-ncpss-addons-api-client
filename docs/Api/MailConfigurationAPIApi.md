@@ -1,4 +1,4 @@
-# IONOS\NextcloudPSS\AddonsAPI\Client\MailConfigurationAPIApi
+# IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi
 
 All URIs are relative to https://API_HOST/nextcloud, except if the operation defines another base path.
 
