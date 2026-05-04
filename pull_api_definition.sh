@@ -32,6 +32,23 @@ readonly GIT_IGNORE_PATTERN='^.. (vendor/|vendor-bin/|node_modules/)'
 readonly BRANCH_PREFIX="feat/api-update-"
 
 # =============================================================================
+# Color Support
+# =============================================================================
+
+# Respect NO_COLOR convention; disable when not writing to a terminal
+if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
+	readonly C_RED=$'\e[0;31m'
+	readonly C_YELLOW=$'\e[1;33m'
+	readonly C_GREEN=$'\e[0;32m'
+	readonly C_CYAN=$'\e[0;36m'
+	readonly C_BOLD=$'\e[1m'
+	readonly C_DIM=$'\e[2m'
+	readonly C_RESET=$'\e[0m'
+else
+	readonly C_RED='' C_YELLOW='' C_GREEN='' C_CYAN='' C_BOLD='' C_DIM='' C_RESET=''
+fi
+
+# =============================================================================
 # Global Variables
 # =============================================================================
 
@@ -54,18 +71,32 @@ trap cleanup EXIT
 
 # Print error message and exit
 die() {
-	echo "[e] ERROR: $*" >&2
+	printf "${C_RED}${C_BOLD}[✗] ERROR: %s${C_RESET}\n" "$*" >&2
 	exit 1
 }
 
 # Print warning message
 warn() {
-	echo "[w] WARNING: $*" >&2
+	printf "${C_YELLOW}[!] WARNING: %s${C_RESET}\n" "$*" >&2
 }
 
 # Print info message
 info() {
-	echo "[i] $*"
+	printf "${C_CYAN}[i]${C_RESET} %s\n" "$*"
+}
+
+# Print success message
+success() {
+	printf "${C_GREEN}[✓]${C_RESET} ${C_BOLD}%s${C_RESET}\n" "$*"
+}
+
+# Print a titled section header box
+print_header() {
+	local title=$1
+	echo ""
+	printf "${C_BOLD}┌──────────────────────────────────────────────────────────────────┐${C_RESET}\n"
+	printf "${C_BOLD}│${C_RESET} %-64s ${C_BOLD}│${C_RESET}\n" "${title}"
+	printf "${C_BOLD}└──────────────────────────────────────────────────────────────────┘${C_RESET}\n"
 }
 
 # Ask yes/no question with default answer
@@ -73,13 +104,14 @@ info() {
 ask_yes_no() {
 	local question=$1
 	local default=${2:-Y}
-	local prompt="[Y/n]"
+	local prompt="${C_BOLD}[Y/n]${C_RESET}"
 
 	if [[ "${default}" == "N" ]]; then
-		prompt="[y/N]"
+		prompt="${C_BOLD}[y/N]${C_RESET}"
 	fi
 
-	read -p "${question} ${prompt} " -n 1 -r
+	printf "%s %b " "${question}" "${prompt}"
+	read -r -n 1 REPLY
 	echo
 
 	if [[ "${default}" == "Y" ]]; then
@@ -128,30 +160,30 @@ show_branch_locations() {
 
 # Show usage information
 show_help() {
-	cat <<-'EOF'
-		┌──────────────────────────────────────────────────────────────────┐
+	cat <<-EOF
+		${C_BOLD}┌──────────────────────────────────────────────────────────────────┐
 		│ API Definition Update Script                                    │
-		└──────────────────────────────────────────────────────────────────┘
+		└──────────────────────────────────────────────────────────────────┘${C_RESET}
 
-		USAGE:
+		${C_BOLD}USAGE:${C_RESET}
 		  ./pull_api_definition.sh <host> [base_branch]
 
-		ARGUMENTS:
-		  host         The host where the API spec is hosted (including port if needed)
-		  base_branch  The base branch to use (default: main)
+		${C_BOLD}ARGUMENTS:${C_RESET}
+		  ${C_CYAN}host${C_RESET}         The host where the API spec is hosted (including port if needed)
+		  ${C_CYAN}base_branch${C_RESET}  The base branch to use (default: main)
 
-		EXAMPLES:
-		  # Update from a specific API host
+		${C_BOLD}EXAMPLES:${C_RESET}
+		  ${C_DIM}# Update from a specific API host${C_RESET}
 		  ./pull_api_definition.sh api.example.lan:10443
 
-		  # Use a different base branch
+		  ${C_DIM}# Use a different base branch${C_RESET}
 		  ./pull_api_definition.sh api.example.lan:10443 mk/dev/some_other_base_branch
 
-		  # With authentication
+		  ${C_DIM}# With authentication${C_RESET}
 		  export API_SPEC_USER=<user> API_SPEC_PASSWORD=<pass>
 		  ./pull_api_definition.sh api.example.lan:10443
 
-		  # Allow insecure SSL (for testing only)
+		  ${C_DIM}# Allow insecure SSL (for testing only)${C_RESET}
 		  export ALLOW_INSECURE_SSL=1
 		  ./pull_api_definition.sh api.example.lan:10443
 
@@ -191,7 +223,7 @@ parse_args() {
 	# Set base_branch if provided as second argument
 	if [[ $# -ge 2 ]]; then
 		base_branch="$2"
-		info "Using base branch: ${base_branch}"
+		info "Using base branch: ${C_BOLD}${base_branch}${C_RESET}"
 	fi
 }
 
@@ -236,7 +268,7 @@ get_remote_version() {
 fetch_from_origin() {
 	info "Fetching latest changes from origin..."
 	if ! git fetch origin; then
-		warn "Warning: git fetch origin failed, continuing..."
+		warn "git fetch origin failed, continuing..."
 	fi
 }
 
@@ -245,8 +277,8 @@ display_versions() {
 	local current_version=$1
 	local origin_version=$2
 
-	info "Current local version: ${current_version:-none}"
-	info "Origin/${base_branch} version: ${origin_version:-none}"
+	info "Current local version:       ${C_BOLD}${current_version:-none}${C_RESET}"
+	info "Origin/${base_branch} version: ${C_BOLD}${origin_version:-none}${C_RESET}"
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -258,11 +290,8 @@ download_api_spec() {
 	local api_spec_host=$1
 	local api_spec_url="https://${api_spec_host}${API_PATH}"
 
-	echo ""
-	echo "┌──────────────────────────────────────────────────────────────────┐"
-	echo "│ Downloading API Specification                                   │"
-	echo "└──────────────────────────────────────────────────────────────────┘"
-	echo "  URL: ${api_spec_url}"
+	print_header "Downloading API Specification"
+	echo "  URL: ${C_CYAN}${api_spec_url}${C_RESET}"
 	echo ""
 
 	temp_file=$(mktemp)
@@ -296,7 +325,7 @@ handle_version_comparison() {
 
 	if [[ "${origin_version}" != "${remote_version}" ]]; then
 		echo ""
-		echo "Remote version (${remote_version}) is different from origin/${base_branch} (${origin_version:-none})"
+		echo "Remote version (${C_BOLD}${remote_version}${C_RESET}) differs from origin/${base_branch} (${C_BOLD}${origin_version:-none}${C_RESET})"
 		echo ""
 
 		if ask_yes_no "Do you want to create a new branch from origin/${base_branch} for this update?" "Y"; then
@@ -305,7 +334,8 @@ handle_version_comparison() {
 		fi
 	elif [[ "${current_version}" == "${remote_version}" ]]; then
 		echo ""
-		echo "API spec is up to date. Local:${current_version} Remote:${remote_version}"
+		printf "${C_GREEN}API spec is up to date.${C_RESET} Local: ${C_BOLD}%s${C_RESET}  Remote: ${C_BOLD}%s${C_RESET}\n" \
+			"${current_version}" "${remote_version}"
 
 		if ! ask_yes_no "Do you want to overwrite the local API spec?" "N"; then
 			info "Skipping update"
@@ -334,10 +364,10 @@ handle_existing_branch() {
 
 	echo ""
 	echo "What would you like to do?"
-	echo "  1) Switch to existing branch"
-	echo "  2) Choose a different branch name"
-	echo "  3) Abort"
-	read -p "Enter your choice [1-3]: " -n 1 -r choice
+	echo "  ${C_BOLD}1)${C_RESET} Switch to existing branch"
+	echo "  ${C_BOLD}2)${C_RESET} Choose a different branch name"
+	echo "  ${C_BOLD}3)${C_RESET} Abort"
+	read -r -p "Enter your choice [1-3]: " -n 1 choice
 	echo
 
 	case ${choice} in
@@ -364,10 +394,10 @@ switch_to_existing_branch() {
 	local branch_exists_remote=$3
 
 	if [[ ${branch_exists_local} -gt 0 ]]; then
-		info "Switching to existing local branch: ${branch}"
+		info "Switching to existing local branch: ${C_BOLD}${branch}${C_RESET}"
 		git checkout "${branch}" || die "Failed to switch to branch"
 	else
-		info "Checking out remote branch: ${branch}"
+		info "Checking out remote branch: ${C_BOLD}${branch}${C_RESET}"
 		git checkout -b "${branch}" "origin/${branch}" || die "Failed to checkout remote branch"
 	fi
 }
@@ -383,7 +413,7 @@ prompt_for_branch_name() {
 
 	while true; do
 		echo ""
-		info "Suggested branch name: ${current_suggestion}"
+		info "Suggested branch name: ${C_BOLD}${current_suggestion}${C_RESET}"
 		read -r -p "Enter new branch name (or press Enter to use suggested): " new_name
 
 		# Use suggested name if user pressed Enter
@@ -410,7 +440,7 @@ prompt_for_branch_name() {
 		else
 			# Branch name is valid and doesn't exist
 			branch_name="${new_name}"
-			info "Creating new branch from latest origin/${base_branch}: ${branch_name}"
+			info "Creating new branch from latest origin/${base_branch}: ${C_BOLD}${branch_name}${C_RESET}"
 
 			# Ensure we're creating from latest origin/base_branch
 			if ! git checkout "origin/${base_branch}"; then
@@ -421,7 +451,7 @@ prompt_for_branch_name() {
 				die "Failed to create branch"
 			fi
 
-			info "✓ Branch '${branch_name}' created from origin/${base_branch}"
+			success "Branch '${branch_name}' created from origin/${base_branch}"
 			break
 		fi
 	done
@@ -443,7 +473,7 @@ create_update_branch() {
 	if [[ ${branch_exists_local} -gt 0 || ${branch_exists_remote} -gt 0 ]]; then
 		handle_existing_branch "${branch_name}"
 	else
-		info "Creating new branch from latest origin/${base_branch}: ${branch_name}"
+		info "Creating new branch from latest origin/${base_branch}: ${C_BOLD}${branch_name}${C_RESET}"
 
 		# Ensure we're creating from latest origin/base_branch
 		if ! git checkout "origin/${base_branch}"; then
@@ -454,7 +484,7 @@ create_update_branch() {
 			die "Failed to create branch"
 		fi
 
-		info "✓ Branch '${branch_name}' created from origin/${base_branch}"
+		success "Branch '${branch_name}' created from origin/${base_branch}"
 	fi
 }
 
@@ -469,17 +499,14 @@ jq_transform() {
 sanitize_api_spec() {
 	local api_spec_host=$1
 
-	echo ""
-	echo "┌──────────────────────────────────────────────────────────────────┐"
-	echo "│ Sanitizing API Specification                                    │"
-	echo "└──────────────────────────────────────────────────────────────────┘"
+	print_header "Sanitizing API Specification"
 
 	# Pretty print
 	info "Pretty printing JSON..."
 	jq_transform '.'
 
 	# Sanitize host URL
-	info "Sanitizing host URL: https://${api_spec_host} → ${HOST_PLACEHOLDER}"
+	info "Sanitizing host URL: ${C_BOLD}https://${api_spec_host}${C_RESET} → ${C_BOLD}${HOST_PLACEHOLDER}${C_RESET}"
 	sed -i "s|https://${api_spec_host}|${HOST_PLACEHOLDER}|g" "${OUTPUT_FILE}"
 
 	# Sanitize title
@@ -505,7 +532,7 @@ ask_regenerate_client() {
 	if ask_yes_no "Do you want to run 'make php' to regenerate the PHP client?" "Y"; then
 		info "Running 'make php'..."
 		if make php; then
-			info "PHP client generation completed successfully"
+			success "PHP client generation completed successfully"
 			return 0
 		else
 			die "PHP client generation failed"
@@ -522,10 +549,7 @@ ask_regenerate_client() {
 
 # Show git status with untracked files
 show_git_status() {
-	echo ""
-	echo "┌──────────────────────────────────────────────────────────────────┐"
-	echo "│ Current Git Status                                              │"
-	echo "└──────────────────────────────────────────────────────────────────┘"
+	print_header "Current Git Status"
 	git status --short --untracked-files=all | grep -v -E "${GIT_IGNORE_PATTERN}"
 	echo ""
 }
@@ -538,7 +562,7 @@ stage_changes() {
 
 	echo "The following changes will be staged:"
 	for path in "${STAGE_PATHS[@]}"; do
-		echo "  - ${path}"
+		printf "  ${C_CYAN}·${C_RESET} %s\n" "${path}"
 	done
 	echo ""
 	echo "Note: Other files will be ignored and not staged."
@@ -568,7 +592,7 @@ create_commit() {
 
 	echo ""
 	echo "Suggested commit message (conventional commits format):"
-	echo "  ${commit_msg}"
+	printf "  ${C_BOLD}%s${C_RESET}\n" "${commit_msg}"
 	echo ""
 
 	if ask_yes_no "Do you want to use this commit message?" "Y"; then
@@ -590,7 +614,7 @@ create_commit() {
 
 	info "Creating commit..."
 	if git commit -m "${commit_msg}"; then
-		info "✓ Commit created successfully"
+		success "Commit created successfully"
 		echo ""
 		git --no-pager log -1 --oneline
 		echo ""
@@ -607,10 +631,10 @@ verify_commit() {
 	status=$(git status --short | grep -v -E "${GIT_IGNORE_PATTERN}")
 
 	if [[ -z "${status}" ]]; then
-		info "✓ All changes have been committed"
+		success "All changes have been committed"
 		return 0
 	else
-		warn "Warning: There are still uncommitted changes:"
+		warn "There are still uncommitted changes:"
 		git status --short | grep -v -E "${GIT_IGNORE_PATTERN}"
 		return 1
 	fi
@@ -621,10 +645,7 @@ handle_commit_workflow() {
 	local remote_version=$1
 	local client_regenerated=$2
 
-	echo ""
-	echo "┌──────────────────────────────────────────────────────────────────┐"
-	echo "│ Commit Workflow                                                 │"
-	echo "└──────────────────────────────────────────────────────────────────┘"
+	print_header "Commit Workflow"
 
 	# Stage changes
 	if ! stage_changes "${remote_version}"; then
@@ -684,7 +705,7 @@ main() {
 
 	# Get remote version
 	remote_version=$(get_remote_version "${temp_file}")
-	info "Remote API version: ${remote_version}"
+	info "Remote API version: ${C_BOLD}${remote_version}${C_RESET}"
 
 	# Handle version comparison and branching
 	handle_version_comparison "${current_version}" "${origin_version}" "${remote_version}"
@@ -693,15 +714,15 @@ main() {
 	create_update_branch
 
 	# Update local file
-	info "Updating API spec to version ${remote_version}"
+	info "Updating API spec to version ${C_BOLD}${remote_version}${C_RESET}"
 	cp "${temp_file}" "${OUTPUT_FILE}"
 
 	# Sanitize the spec
 	sanitize_api_spec "${api_spec_host}"
 
 	echo ""
-	info "API definition updated and sanitized successfully"
-	info "New version: ${remote_version}"
+	success "API definition updated and sanitized successfully"
+	info "New version: ${C_BOLD}${remote_version}${C_RESET}"
 
 	# Ask to regenerate client
 	local client_regenerated=false
@@ -710,10 +731,7 @@ main() {
 	fi
 
 	# Show what would be committed
-	echo ""
-	echo "┌──────────────────────────────────────────────────────────────────┐"
-	echo "│ Files to be Committed                                           │"
-	echo "└──────────────────────────────────────────────────────────────────┘"
+	print_header "Files to be Committed"
 	git status --short --untracked-files=all | grep -v -E "${GIT_IGNORE_PATTERN}"
 	echo ""
 
@@ -721,7 +739,7 @@ main() {
 	echo ""
 	if ask_yes_no "Do you want to commit these changes now?" "Y"; then
 		if handle_commit_workflow "${remote_version}" "${client_regenerated}"; then
-			info "✓ Changes committed successfully"
+			success "Changes committed successfully"
 
 			# Offer to push
 			echo ""
@@ -729,7 +747,7 @@ main() {
 				if ask_yes_no "Do you want to push branch '${branch_name}' to remote?" "N"; then
 					info "Pushing to remote..."
 					if git push -u origin "${branch_name}"; then
-						info "✓ Branch pushed successfully"
+						success "Branch pushed successfully"
 					else
 						warn "Failed to push branch. You can push manually with:"
 						warn "  git push -u origin ${branch_name}"
@@ -745,18 +763,15 @@ main() {
 	fi
 
 	# Final message
-	echo ""
-	echo "┌──────────────────────────────────────────────────────────────────┐"
-	echo "│ Summary                                                         │"
-	echo "└──────────────────────────────────────────────────────────────────┘"
-	info "✓ Done!"
+	print_header "Summary"
+	success "Done!"
 	if [[ "${create_branch}" == "true" ]]; then
-		info "  Branch: ${branch_name}"
+		info "  Branch:   ${C_BOLD}${branch_name}${C_RESET}"
 	fi
-	info "  API version: ${remote_version}"
-	info "  API spec file: ${OUTPUT_FILE}"
+	info "  Version:  ${C_BOLD}${remote_version}${C_RESET}"
+	info "  API spec: ${C_BOLD}${OUTPUT_FILE}${C_RESET}"
 	if [[ "${client_regenerated}" == "true" ]]; then
-		info "  PHP client: regenerated"
+		info "  PHP client regenerated"
 	fi
 	echo ""
 }
