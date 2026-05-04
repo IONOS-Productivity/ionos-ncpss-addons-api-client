@@ -15,7 +15,7 @@ path = [
     ".gitignore",
     "lib/**/*.php",
     ".github/dependabot.yml",
-    ".ncw-mail-configuration.json",
+    "openapi.json",
     ".openapi-generator/FILES",
     ".openapi-generator/VERSION",
     ".openapi-generator-ignore",

@@ -8,7 +8,7 @@ This file provides guidance to AI Agents when working with code in this reposito
 
 ## What this repo is
 
-An OpenAPI-generated PHP client library for the IONOS Nextcloud PSS Addon API. The source of truth is `.ncw-mail-configuration.json` (OpenAPI 3.1.0 spec). Everything in `lib/`, `test/`, and `docs/` is generated — edit the spec or the generator templates, then regenerate.
+An OpenAPI-generated PHP client library for the IONOS Nextcloud PSS Addon API. The source of truth is `openapi.json` (OpenAPI 3.1.0 spec). Everything in `lib/`, `test/`, and `docs/` is generated — edit the spec or the generator templates, then regenerate.
 
 ## Key commands
 
@@ -51,7 +51,7 @@ docs/            Generated Markdown documentation
 openapi-generator/
   php_lang.yaml  Generator config (namespace, package name, conventions)
   templates/php/ Custom Mustache templates that override generator defaults
-.ncw-mail-configuration.json   OpenAPI spec — the single source of truth
+openapi.json   OpenAPI spec — the single source of truth
 ```
 
 The generator is `openapi-generator-cli` v7.14.0 (Node.js, see `openapitools.json` and `package.json`). Generator config is at `openapi-generator/php_lang.yaml`; custom template overrides live in `openapi-generator/templates/php/`.
@@ -62,7 +62,7 @@ Minimum PHP: 8.1
 
 ## Workflow for changes
 
-- **API changes**: modify `.ncw-mail-configuration.json`, then run `make php`. Do not hand-edit `lib/` or `test/` — they will be overwritten.
+- **API changes**: modify `openapi.json`, then run `make php`. Do not hand-edit `lib/` or `test/` — they will be overwritten.
 - **Code generation behavior changes**: modify templates in `openapi-generator/templates/php/` or `openapi-generator/php_lang.yaml`, then run `make php`.
 - **Style rules**: edit `.php-cs-fixer.dist.php`.
 - **Static analysis config**: edit `psalm.xml`.
