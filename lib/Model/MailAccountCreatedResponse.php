@@ -6,7 +6,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -35,16 +35,16 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client\Model;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client\Model;
 
 use \ArrayAccess;
-use \IONOS\MailConfigurationAPI\Client\ObjectSerializer;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
 
 /**
  * MailAccountCreatedResponse Class Doc Comment
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -69,7 +69,7 @@ class MailAccountCreatedResponse implements ModelInterface, ArrayAccess, \JsonSe
         'password' => 'string',
         'email' => 'string',
         'nextcloudUserId' => 'string',
-        'server' => '\IONOS\MailConfigurationAPI\Client\Model\MailServer'
+        'server' => '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailServer'
     ];
 
     /**
@@ -403,7 +403,7 @@ class MailAccountCreatedResponse implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets server
      *
-     * @return \IONOS\MailConfigurationAPI\Client\Model\MailServer|null
+     * @return \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailServer|null
      */
     public function getServer()
     {
@@ -413,7 +413,7 @@ class MailAccountCreatedResponse implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets server
      *
-     * @param \IONOS\MailConfigurationAPI\Client\Model\MailServer|null $server The configuration for smtp and imap servers.
+     * @param \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailServer|null $server The configuration for smtp and imap servers.
      *
      * @return self
      */

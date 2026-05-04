@@ -5,7 +5,7 @@
  * PHP version 7.4
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -34,20 +34,20 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client;
 
 use ArrayAccess;
 use DateTime;
 use GuzzleHttp\Psr7\Utils;
 use Psr\Http\Message\StreamInterface;
 use SplFileObject;
-use IONOS\MailConfigurationAPI\Client\Model\ModelInterface;
+use IONOS\NextcloudPSS\AddonsAPI\Client\Model\ModelInterface;
 
 /**
  * FormDataProcessor Class Doc Comment
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */

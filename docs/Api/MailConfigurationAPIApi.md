@@ -1,4 +1,4 @@
-# IONOS\MailConfigurationAPI\Client\MailConfigurationAPIApi
+# IONOS\NextcloudPSS\AddonsAPI\Client\MailConfigurationAPIApi
 
 All URIs are relative to https://API_HOST/nextcloud, except if the operation defines another base path.
 
@@ -16,7 +16,7 @@ All URIs are relative to https://API_HOST/nextcloud, except if the operation def
 ## `createMailbox()`
 
 ```php
-createMailbox($brand, $extRef, $mailCreateData): \IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse
+createMailbox($brand, $extRef, $mailCreateData): \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountCreatedResponse
 ```
 
 Creates a mailbox on IONOS plattform that is used for nextcloud user
@@ -29,13 +29,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure HTTP basic authorization: basicAuth
-$config = IONOS\MailConfigurationAPI\Client\Configuration::getDefaultConfiguration()
+$config = IONOS\NextcloudPSS\AddonsAPI\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
 
-$apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi(
+$apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -43,7 +43,7 @@ $apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi
 );
 $brand = 'brand_example'; // string
 $extRef = 'extRef_example'; // string
-$mailCreateData = new \IONOS\MailConfigurationAPI\Client\Model\MailCreateData(); // \IONOS\MailConfigurationAPI\Client\Model\MailCreateData
+$mailCreateData = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData(); // \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData
 
 try {
     $result = $apiInstance->createMailbox($brand, $extRef, $mailCreateData);
@@ -59,11 +59,11 @@ try {
 | ------------- | ------------- | ------------- | ------------- |
 | **brand** | **string**|  | |
 | **extRef** | **string**|  | |
-| **mailCreateData** | [**\IONOS\MailConfigurationAPI\Client\Model\MailCreateData**](../Model/MailCreateData.md)|  | |
+| **mailCreateData** | [**\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData**](../Model/MailCreateData.md)|  | |
 
 ### Return type
 
-[**\IONOS\MailConfigurationAPI\Client\Model\MailAccountCreatedResponse**](../Model/MailAccountCreatedResponse.md)
+[**\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountCreatedResponse**](../Model/MailAccountCreatedResponse.md)
 
 ### Authorization
 
@@ -94,13 +94,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure HTTP basic authorization: basicAuth
-$config = IONOS\MailConfigurationAPI\Client\Configuration::getDefaultConfiguration()
+$config = IONOS\NextcloudPSS\AddonsAPI\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
 
-$apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi(
+$apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -160,13 +160,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure HTTP basic authorization: basicAuth
-$config = IONOS\MailConfigurationAPI\Client\Configuration::getDefaultConfiguration()
+$config = IONOS\NextcloudPSS\AddonsAPI\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
 
-$apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi(
+$apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -211,7 +211,7 @@ void (empty response body)
 ## `getAllFunctionalAccounts()`
 
 ```php
-getAllFunctionalAccounts($brand, $extRef): \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]
+getAllFunctionalAccounts($brand, $extRef): \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse[]
 ```
 
 Returns all functional mailboxes for the given brand and extRef
@@ -224,13 +224,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure HTTP basic authorization: basicAuth
-$config = IONOS\MailConfigurationAPI\Client\Configuration::getDefaultConfiguration()
+$config = IONOS\NextcloudPSS\AddonsAPI\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
 
-$apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi(
+$apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -256,7 +256,7 @@ try {
 
 ### Return type
 
-[**\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse[]**](../Model/MailAccountResponse.md)
+[**\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse[]**](../Model/MailAccountResponse.md)
 
 ### Authorization
 
@@ -274,7 +274,7 @@ try {
 ## `getFunctionalAccount()`
 
 ```php
-getFunctionalAccount($brand, $extRef, $nextcloudUserId): \IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse
+getFunctionalAccount($brand, $extRef, $nextcloudUserId): \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse
 ```
 
 Returns all functional mailboxes for the given brand and extRef and nextcloudUserId
@@ -287,13 +287,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure HTTP basic authorization: basicAuth
-$config = IONOS\MailConfigurationAPI\Client\Configuration::getDefaultConfiguration()
+$config = IONOS\NextcloudPSS\AddonsAPI\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
 
-$apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi(
+$apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -321,7 +321,7 @@ try {
 
 ### Return type
 
-[**\IONOS\MailConfigurationAPI\Client\Model\MailAccountResponse**](../Model/MailAccountResponse.md)
+[**\IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailAccountResponse**](../Model/MailAccountResponse.md)
 
 ### Authorization
 
@@ -352,13 +352,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure HTTP basic authorization: basicAuth
-$config = IONOS\MailConfigurationAPI\Client\Configuration::getDefaultConfiguration()
+$config = IONOS\NextcloudPSS\AddonsAPI\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
 
-$apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi(
+$apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -367,7 +367,7 @@ $apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi
 $brand = 'brand_example'; // string
 $extRef = 'extRef_example'; // string
 $nextcloudUserId = 'nextcloudUserId_example'; // string
-$patchMailRequest = new \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest(); // \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest
+$patchMailRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest(); // \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest
 
 try {
     $apiInstance->patchMailbox($brand, $extRef, $nextcloudUserId, $patchMailRequest);
@@ -383,7 +383,7 @@ try {
 | **brand** | **string**|  | |
 | **extRef** | **string**|  | |
 | **nextcloudUserId** | **string**|  | |
-| **patchMailRequest** | [**\IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest**](../Model/PatchMailRequest.md)|  | |
+| **patchMailRequest** | [**\IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest**](../Model/PatchMailRequest.md)|  | |
 
 ### Return type
 
@@ -418,13 +418,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 // Configure HTTP basic authorization: basicAuth
-$config = IONOS\MailConfigurationAPI\Client\Configuration::getDefaultConfiguration()
+$config = IONOS\NextcloudPSS\AddonsAPI\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
 
-$apiInstance = new IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi(
+$apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),

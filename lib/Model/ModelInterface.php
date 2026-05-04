@@ -6,7 +6,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client\Model
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client\Model
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -35,12 +35,12 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client\Model;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client\Model;
 
 /**
  * Interface abstracting model access.
  *
- * @package IONOS\MailConfigurationAPI\Client\Model
+ * @package IONOS\NextcloudPSS\AddonsAPI\Client\Model
  * @author  OpenAPI Generator team
  */
 interface ModelInterface

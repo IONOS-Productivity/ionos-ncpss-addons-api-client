@@ -5,7 +5,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -34,14 +34,14 @@ declare(strict_types=1);
  * Please update the test case below to test the endpoint.
  */
 
-namespace IONOS\MailConfigurationAPI\Client\Test\Api;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client\Test\Api;
 
-use \IONOS\MailConfigurationAPI\Client\Configuration;
-use \IONOS\MailConfigurationAPI\Client\ApiException;
-use \IONOS\MailConfigurationAPI\Client\ObjectSerializer;
-use \IONOS\MailConfigurationAPI\Client\Api\MailConfigurationAPIApi;
-use \IONOS\MailConfigurationAPI\Client\Model\MailCreateData;
-use \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\Configuration;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\ApiException;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\Api\MailConfigurationAPIApi;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -54,7 +54,7 @@ use PHPUnit\Framework\TestCase;
  * MailConfigurationAPIApiTest Class Doc Comment
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -119,7 +119,7 @@ class MailConfigurationAPIApiTest extends TestCase
         // Setup test parameters
         $brand = 'test_brand';
         $extRef = 'test_extRef';
-        $mailCreateData = new \IONOS\MailConfigurationAPI\Client\Model\MailCreateData();
+        $mailCreateData = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData();
 
         // Execute the API call
         $result = $this->api->createMailbox($brand, $extRef, $mailCreateData);
@@ -146,7 +146,7 @@ class MailConfigurationAPIApiTest extends TestCase
         // Setup test parameters
         $brand = 'test_brand';
         $extRef = 'test_extRef';
-        $mailCreateData = new \IONOS\MailConfigurationAPI\Client\Model\MailCreateData();
+        $mailCreateData = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData();
 
         // Execute the API call with HTTP info
         $result = $this->api->createMailboxWithHttpInfo($brand, $extRef, $mailCreateData);
@@ -173,7 +173,7 @@ class MailConfigurationAPIApiTest extends TestCase
         // Setup test parameters
         $brand = 'test_brand';
         $extRef = 'test_extRef';
-        $mailCreateData = new \IONOS\MailConfigurationAPI\Client\Model\MailCreateData();
+        $mailCreateData = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\MailCreateData();
 
         // Expect ApiException to be thrown
         $this->expectException(ApiException::class);
@@ -508,7 +508,7 @@ class MailConfigurationAPIApiTest extends TestCase
         $brand = 'test_brand';
         $extRef = 'test_extRef';
         $nextcloudUserId = 'test_nextcloudUserId';
-        $patchMailRequest = new \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest();
+        $patchMailRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest();
 
         // Execute the API call
         $this->api->patchMailbox($brand, $extRef, $nextcloudUserId, $patchMailRequest);
@@ -533,7 +533,7 @@ class MailConfigurationAPIApiTest extends TestCase
         $brand = 'test_brand';
         $extRef = 'test_extRef';
         $nextcloudUserId = 'test_nextcloudUserId';
-        $patchMailRequest = new \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest();
+        $patchMailRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest();
 
         // Execute the API call with HTTP info
         $result = $this->api->patchMailboxWithHttpInfo($brand, $extRef, $nextcloudUserId, $patchMailRequest);
@@ -561,7 +561,7 @@ class MailConfigurationAPIApiTest extends TestCase
         $brand = 'test_brand';
         $extRef = 'test_extRef';
         $nextcloudUserId = 'test_nextcloudUserId';
-        $patchMailRequest = new \IONOS\MailConfigurationAPI\Client\Model\PatchMailRequest();
+        $patchMailRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\PatchMailRequest();
 
         // Expect ApiException to be thrown
         $this->expectException(ApiException::class);

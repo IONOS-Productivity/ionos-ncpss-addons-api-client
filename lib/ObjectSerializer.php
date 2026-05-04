@@ -6,7 +6,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -35,16 +35,16 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client;
 
 use GuzzleHttp\Psr7\Utils;
-use IONOS\MailConfigurationAPI\Client\Model\ModelInterface;
+use IONOS\NextcloudPSS\AddonsAPI\Client\Model\ModelInterface;
 
 /**
  * ObjectSerializer Class Doc Comment
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -516,7 +516,7 @@ class ObjectSerializer
             // If a discriminator is defined and points to a valid subclass, use it.
             $discriminator = $class::DISCRIMINATOR;
             if (!empty($discriminator) && isset($data->{$discriminator}) && is_string($data->{$discriminator})) {
-                $subclass = '\IONOS\MailConfigurationAPI\Client\Model\\' . $data->{$discriminator};
+                $subclass = '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\\' . $data->{$discriminator};
                 if (is_subclass_of($subclass, $class)) {
                     $class = $subclass;
                 }
@@ -582,8 +582,12 @@ class ObjectSerializer
         }
 
         $castBool = Configuration::BOOLEAN_FORMAT_INT == Configuration::getDefaultConfiguration()->getBooleanFormatForQueryString()
-            ? function ($v) { return (int) $v; }
-        : function ($v) { return $v ? 'true' : 'false'; };
+            ? function ($v) {
+                return (int) $v;
+            }
+        : function ($v) {
+            return $v ? 'true' : 'false';
+        };
 
         $qs = '';
         foreach ($params as $k => $v) {

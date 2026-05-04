@@ -6,7 +6,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -35,17 +35,17 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client\Model;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client\Model;
 
 use \ArrayAccess;
-use \IONOS\MailConfigurationAPI\Client\ObjectSerializer;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
 
 /**
  * ImapConfig Class Doc Comment
  *
  * @category Class
  * @description Imap server configuration.
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>

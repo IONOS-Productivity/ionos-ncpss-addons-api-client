@@ -6,7 +6,7 @@
  * PHP version 8.1
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -35,16 +35,16 @@ declare(strict_types=1);
  * Do not edit the class manually.
  */
 
-namespace IONOS\MailConfigurationAPI\Client\Model;
+namespace IONOS\NextcloudPSS\AddonsAPI\Client\Model;
 
 use \ArrayAccess;
-use \IONOS\MailConfigurationAPI\Client\ObjectSerializer;
+use \IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
 
 /**
  * MailServer Class Doc Comment
  *
  * @category Class
- * @package  IONOS\MailConfigurationAPI\Client
+ * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
@@ -66,8 +66,8 @@ class MailServer implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'imap' => '\IONOS\MailConfigurationAPI\Client\Model\ImapConfig',
-        'smtp' => '\IONOS\MailConfigurationAPI\Client\Model\SmtpConfig'
+        'imap' => '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\ImapConfig',
+        'smtp' => '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\SmtpConfig'
     ];
 
     /**
@@ -308,7 +308,7 @@ class MailServer implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets imap
      *
-     * @return \IONOS\MailConfigurationAPI\Client\Model\ImapConfig|null
+     * @return \IONOS\NextcloudPSS\AddonsAPI\Client\Model\ImapConfig|null
      */
     public function getImap()
     {
@@ -318,7 +318,7 @@ class MailServer implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets imap
      *
-     * @param \IONOS\MailConfigurationAPI\Client\Model\ImapConfig|null $imap imap
+     * @param \IONOS\NextcloudPSS\AddonsAPI\Client\Model\ImapConfig|null $imap imap
      *
      * @return self
      */
@@ -335,7 +335,7 @@ class MailServer implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets smtp
      *
-     * @return \IONOS\MailConfigurationAPI\Client\Model\SmtpConfig|null
+     * @return \IONOS\NextcloudPSS\AddonsAPI\Client\Model\SmtpConfig|null
      */
     public function getSmtp()
     {
@@ -345,7 +345,7 @@ class MailServer implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets smtp
      *
-     * @param \IONOS\MailConfigurationAPI\Client\Model\SmtpConfig|null $smtp smtp
+     * @param \IONOS\NextcloudPSS\AddonsAPI\Client\Model\SmtpConfig|null $smtp smtp
      *
      * @return self
      */
