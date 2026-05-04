@@ -1,5 +1,5 @@
 # Variables
-OPENAPI_SPEC := .ncw-mail-configuration.json
+OPENAPI_SPEC := openapi.json
 GENERATOR_CLI := ./node_modules/.bin/openapi-generator-cli
 GENERATOR_CONFIG := ./openapi-generator/php_lang.yaml
 LIB_DIR := lib

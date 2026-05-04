@@ -11,7 +11,7 @@ set -euo pipefail
 # =============================================================================
 
 readonly REQUIRED_CLI_APPS=(curl jq sed git)
-readonly OUTPUT_FILE=".ncw-mail-configuration.json"
+readonly OUTPUT_FILE="openapi.json"
 readonly API_PATH="/nextcloud/api-docs/Addon%20API"
 
 # =============================================================================
@@ -524,7 +524,7 @@ stage_changes() {
 	echo "  - lib/*"
 	echo "  - test/*"
 	echo "  - .openapi-generator/*"
-	echo "  - .ncw-mail-configuration.json"
+	echo "  - openapi.json"
 	echo "  - README.md"
 	echo ""
 	echo "Note: Other files will be ignored and not staged."
@@ -536,7 +536,7 @@ stage_changes() {
 	fi
 
 	info "Staging specific files..."
-	git add docs/ lib/ test/ .openapi-generator/ .ncw-mail-configuration.json README.md 2>/dev/null || true
+	git add docs/ lib/ test/ .openapi-generator/ openapi.json README.md 2>/dev/null || true
 
 	# Show what was staged
 	echo ""
