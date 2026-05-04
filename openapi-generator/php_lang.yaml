@@ -1,14 +1,14 @@
 generatorName: php
 outputDir: clients/php
-invokerPackage: IONOS\MailConfigurationAPI\Client
+invokerPackage: IONOS\NextcloudPSS\AddonsAPI\Client
 gitUserId: ionos-productivity
-gitRepoId: ionos-mail-configuration-api-client
-packageName: IONOSMailConfigurationHandler
+gitRepoId: ionos-ncpss-addons-api-client
+packageName: IONOSNextcloudPSSAddonsHandler
 templateDir: openapi-generator/templates/php
 variableNamingConvention: camelCase
-composerPackageName: ionos-productivity/ionos-mail-configuration-api-client
+composerPackageName: ionos-productivity/ionos-ncpss-addons-api-client
 licenseName: AGPL-3.0-or-later
-artifactUrl: https://github.com/ionos-productivity/ionos-mail-configuration-api-client/
+artifactUrl: https://github.com/ionos-productivity/ionos-ncpss-addons-api-client/
 developerOrganization: "STRATO GmbH"
-developerOrganizationUrl: https://github.com/ionos-productivity/ionos-mail-configuration-api-client/
-appDescription: "IONOS Mail Configuration Handler API"
+developerOrganizationUrl: https://github.com/ionos-productivity/ionos-ncpss-addons-api-client/
+appDescription: "IONOS endpoints for NextcloudPSS Addons API"
