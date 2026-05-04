@@ -9,7 +9,7 @@ TEST_DIR := test
 VERSION := $(shell jq -r '.info.version' $(OPENAPI_SPEC) 2>/dev/null || echo "unknown")
 
 # Phony targets
-.PHONY: help clean generate_php_client cs_fix php check_dependencies
+.PHONY: help clean generate_php_client cs_fix php check_dependencies update tag
 
 # Default target
 .DEFAULT_GOAL := help
@@ -53,3 +53,17 @@ cs_fix: ## Fix code style using PHP CS Fixer
 
 php: clean generate_php_client cs_fix ## Generate PHP client and apply code style fixes (full build)
 	@echo "PHP client build completed successfully."
+
+update: ## Fetch updated API spec from a remote server and regenerate the PHP client (API_SPEC_HOST=hostname:port required)
+	@if [ -z "$(API_SPEC_HOST)" ]; then \
+		echo "Error: API_SPEC_HOST is required."; \
+		echo "Usage:   API_SPEC_HOST=hostname:port make update"; \
+		echo "         ALLOW_INSECURE_SSL=1 API_SPEC_HOST=... make update  # for QA (self-signed cert)"; \
+		exit 1; \
+	fi
+	@./pull_api_definition.sh "$(API_SPEC_HOST)"
+
+tag: ## Create and push an annotated git tag for the current API version from openapi.json
+	@API_VERSION=$$(jq -r '.info.version' "$(OPENAPI_SPEC)") && \
+	git tag -a "$${API_VERSION}" -m "Update API client definition $${API_VERSION}" && \
+	git push origin --tags
