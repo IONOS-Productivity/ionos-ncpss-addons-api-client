@@ -14,6 +14,23 @@ readonly REQUIRED_CLI_APPS=(curl jq sed git)
 readonly OUTPUT_FILE="openapi.json"
 readonly API_PATH="/nextcloud/api-docs/Addon%20API"
 
+# Sanitization values applied to the downloaded spec
+readonly API_TITLE="IONOS Nextcloud PSS Addons API"
+readonly API_DESCRIPTION="PHP API client for the IONOS Nextcloud PSS Addons API"
+readonly HOST_PLACEHOLDER="https://API_HOST"
+
+# GitHub repo slug used as fallback when the git remote is unavailable
+readonly GITHUB_REPO="IONOS-Productivity/ionos-ncpss-addons-api-client"
+
+# Files staged and committed after a spec update
+readonly -a STAGE_PATHS=(docs/ lib/ test/ .openapi-generator/ openapi.json README.md)
+
+# grep -E pattern that excludes generated/vendored paths from git status output
+readonly GIT_IGNORE_PATTERN='^.. (vendor/|vendor-bin/|node_modules/)'
+
+# Prefix used when generating feature branch names
+readonly BRANCH_PREFIX="feat/api-update-"
+
 # =============================================================================
 # Global Variables
 # =============================================================================
@@ -81,7 +98,7 @@ generate_branch_name() {
 	# Replace non-alphanumeric characters (except . and -) with underscore
 	version_clean="${version//[^a-zA-Z0-9.-]/_}"
 	timestamp=$(date +%Y%m%d%H%M%S)
-	echo "feat/api-update-${version_clean}-${timestamp}"
+	echo "${BRANCH_PREFIX}${version_clean}-${timestamp}"
 }
 
 # Check if branch exists locally or remotely
@@ -202,7 +219,7 @@ get_origin_version() {
 
 	# If git didn't work or returned empty, fallback to fetching from GitHub repository
 	if [[ -z "${version}" || "${version}" == "null" ]]; then
-		local github_url="https://raw.githubusercontent.com/IONOS-Productivity/ionos-ncpss-addons-api-client/refs/heads/${base_branch}/${OUTPUT_FILE}"
+		local github_url="https://raw.githubusercontent.com/${GITHUB_REPO}/refs/heads/${base_branch}/${OUTPUT_FILE}"
 		version=$(curl -sf "${github_url}" 2>/dev/null | jq -r '.info.version' 2>/dev/null || echo "")
 	fi
 
@@ -462,16 +479,16 @@ sanitize_api_spec() {
 	jq_transform '.'
 
 	# Sanitize host URL
-	info "Sanitizing host URL: https://${api_spec_host} → https://API_HOST"
-	sed -i "s|https://${api_spec_host}|https://API_HOST|g" "${OUTPUT_FILE}"
+	info "Sanitizing host URL: https://${api_spec_host} → ${HOST_PLACEHOLDER}"
+	sed -i "s|https://${api_spec_host}|${HOST_PLACEHOLDER}|g" "${OUTPUT_FILE}"
 
 	# Sanitize title
 	info "Sanitizing title..."
-	jq_transform '.info.title = "IONOS Nextcloud PSS Addons API"'
+	jq_transform ".info.title = \"${API_TITLE}\""
 
 	# Sanitize description
 	info "Sanitizing description..."
-	jq_transform '.info.description = "PHP API client for the IONOS Nextcloud PSS Addons API"'
+	jq_transform ".info.description = \"${API_DESCRIPTION}\""
 
 	# Sanitize contact
 	info "Sanitizing contact..."
@@ -509,7 +526,7 @@ show_git_status() {
 	echo "┌──────────────────────────────────────────────────────────────────┐"
 	echo "│ Current Git Status                                              │"
 	echo "└──────────────────────────────────────────────────────────────────┘"
-	git status --short --untracked-files=all | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)'
+	git status --short --untracked-files=all | grep -v -E "${GIT_IGNORE_PATTERN}"
 	echo ""
 }
 
@@ -520,12 +537,9 @@ stage_changes() {
 	show_git_status
 
 	echo "The following changes will be staged:"
-	echo "  - docs/*"
-	echo "  - lib/*"
-	echo "  - test/*"
-	echo "  - .openapi-generator/*"
-	echo "  - openapi.json"
-	echo "  - README.md"
+	for path in "${STAGE_PATHS[@]}"; do
+		echo "  - ${path}"
+	done
 	echo ""
 	echo "Note: Other files will be ignored and not staged."
 	echo ""
@@ -536,12 +550,12 @@ stage_changes() {
 	fi
 
 	info "Staging specific files..."
-	git add docs/ lib/ test/ .openapi-generator/ openapi.json README.md 2>/dev/null || true
+	git add "${STAGE_PATHS[@]}" 2>/dev/null || true
 
 	# Show what was staged
 	echo ""
 	echo "Staged changes:"
-	git status --short | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)'
+	git status --short | grep -v -E "${GIT_IGNORE_PATTERN}"
 	echo ""
 
 	return 0
@@ -590,14 +604,14 @@ create_commit() {
 # Verify commit was created
 verify_commit() {
 	local status
-	status=$(git status --short | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)')
+	status=$(git status --short | grep -v -E "${GIT_IGNORE_PATTERN}")
 
 	if [[ -z "${status}" ]]; then
 		info "✓ All changes have been committed"
 		return 0
 	else
 		warn "Warning: There are still uncommitted changes:"
-		git status --short | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)'
+		git status --short | grep -v -E "${GIT_IGNORE_PATTERN}"
 		return 1
 	fi
 }
@@ -700,7 +714,7 @@ main() {
 	echo "┌──────────────────────────────────────────────────────────────────┐"
 	echo "│ Files to be Committed                                           │"
 	echo "└──────────────────────────────────────────────────────────────────┘"
-	git status --short --untracked-files=all | grep -v -E '^.. (vendor/|vendor-bin/|node_modules/)'
+	git status --short --untracked-files=all | grep -v -E "${GIT_IGNORE_PATTERN}"
 	echo ""
 
 	# Handle commit workflow
