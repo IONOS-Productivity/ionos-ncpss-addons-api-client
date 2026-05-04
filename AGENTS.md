@@ -80,6 +80,8 @@ Rules:
 
 **Before committing**: plan the full commit sequence upfront — list each intended commit (message + files it stages) before making any of them.
 
+**Untracked files**: never stage a file that is not already tracked by git without asking the user first. Untracked files may be personal scratch files (e.g. `MK.md`) that must not enter the commit history.
+
 **Sign-off required**: every commit must include a `Signed-off-by` trailer. Use `git commit --signoff` (or `-s`).
 
 Enforced by CI (`block-unconventional-commits.yml`) on all PRs.
