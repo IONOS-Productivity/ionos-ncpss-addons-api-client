@@ -29,6 +29,8 @@ jobs:
             src:
               - '.github/workflows/**'
               - 'lib/**'
+              - 'openapi.json'
+              - 'openapi-generator/**'
               - 'vendor/**'
               - 'vendor-bin/**'
               - 'composer.json'
