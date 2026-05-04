@@ -471,7 +471,7 @@ sanitize_api_spec() {
 
 	# Sanitize description
 	info "Sanitizing description..."
-	jq_transform '.info.description = "This is the API client for the Mail Configuration API"'
+	jq_transform '.info.description = "This is the API client for the Nextcloud PSS Addon API"'
 
 	# Sanitize contact
 	info "Sanitizing contact..."
