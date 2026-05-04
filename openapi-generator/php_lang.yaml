@@ -11,4 +11,4 @@ licenseName: AGPL-3.0-or-later
 artifactUrl: https://github.com/ionos-productivity/ionos-ncpss-addons-api-client/
 developerOrganization: "STRATO GmbH"
 developerOrganizationUrl: https://github.com/ionos-productivity/ionos-ncpss-addons-api-client/
-appDescription: "IONOS endpoints for NextcloudPSS Addons API"
+appDescription: "PHP API client for the IONOS Nextcloud PSS Addons API"
