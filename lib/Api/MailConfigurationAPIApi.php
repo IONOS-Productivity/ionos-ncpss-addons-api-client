@@ -390,7 +390,7 @@ class MailConfigurationAPIApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $exception instanceof RequestException ? $exception->getResponse() : null;
                     $statusCode = $response ? $response->getStatusCode() : $exception->getCode();
                     throw new ApiException(
                         sprintf(
@@ -695,7 +695,7 @@ class MailConfigurationAPIApi
                     return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $exception instanceof RequestException ? $exception->getResponse() : null;
                     $statusCode = $response ? $response->getStatusCode() : $exception->getCode();
                     throw new ApiException(
                         sprintf(
@@ -1013,7 +1013,7 @@ class MailConfigurationAPIApi
                     return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $exception instanceof RequestException ? $exception->getResponse() : null;
                     $statusCode = $response ? $response->getStatusCode() : $exception->getCode();
                     throw new ApiException(
                         sprintf(
@@ -1391,7 +1391,7 @@ class MailConfigurationAPIApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $exception instanceof RequestException ? $exception->getResponse() : null;
                     $statusCode = $response ? $response->getStatusCode() : $exception->getCode();
                     throw new ApiException(
                         sprintf(
@@ -1757,7 +1757,7 @@ class MailConfigurationAPIApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $exception instanceof RequestException ? $exception->getResponse() : null;
                     $statusCode = $response ? $response->getStatusCode() : $exception->getCode();
                     throw new ApiException(
                         sprintf(
@@ -2063,7 +2063,7 @@ class MailConfigurationAPIApi
                     return [null, $response->getStatusCode(), $response->getHeaders()];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $exception instanceof RequestException ? $exception->getResponse() : null;
                     $statusCode = $response ? $response->getStatusCode() : $exception->getCode();
                     throw new ApiException(
                         sprintf(
@@ -2464,7 +2464,7 @@ class MailConfigurationAPIApi
                     ];
                 },
                 function ($exception) {
-                    $response = $exception->getResponse();
+                    $response = $exception instanceof RequestException ? $exception->getResponse() : null;
                     $statusCode = $response ? $response->getStatusCode() : $exception->getCode();
                     throw new ApiException(
                         sprintf(

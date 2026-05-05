@@ -35,9 +35,15 @@ $apiInstance = new IONOS\NextcloudPSS\AddonsAPI\Client\Api\StatsAPIApi(
     new GuzzleHttp\Client(),
     $config
 );
-$brand = 'brand_example'; // string
+$brand = 'IONOS'; // string
 $extRef = 'extRef_example'; // string
-$statsUpdateRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest(); // \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest
+
+$users = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats();
+$users->setExistingUsers(42);
+
+$statsUpdateRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest();
+$statsUpdateRequest->setTimestamp(new \DateTime());
+$statsUpdateRequest->setUsers($users);
 
 try {
     $apiInstance->updateStats($brand, $extRef, $statsUpdateRequest);
