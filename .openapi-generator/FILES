@@ -4,6 +4,8 @@
 README.md
 composer.json
 docs/Api/MailConfigurationAPIApi.md
+docs/Api/StatsAPIApi.md
+docs/Model/ErrorMessage.md
 docs/Model/ImapConfig.md
 docs/Model/MailAccountCreatedResponse.md
 docs/Model/MailAccountResponse.md
@@ -12,12 +14,16 @@ docs/Model/MailCreateData.md
 docs/Model/MailServer.md
 docs/Model/PatchMailRequest.md
 docs/Model/SmtpConfig.md
+docs/Model/StatsUpdateRequest.md
+docs/Model/UserStats.md
 git_push.sh
 lib/Api/MailConfigurationAPIApi.php
+lib/Api/StatsAPIApi.php
 lib/ApiException.php
 lib/Configuration.php
 lib/FormDataProcessor.php
 lib/HeaderSelector.php
+lib/Model/ErrorMessage.php
 lib/Model/ImapConfig.php
 lib/Model/MailAccountCreatedResponse.php
 lib/Model/MailAccountResponse.php
@@ -27,6 +33,7 @@ lib/Model/MailServer.php
 lib/Model/ModelInterface.php
 lib/Model/PatchMailRequest.php
 lib/Model/SmtpConfig.php
+lib/Model/StatsUpdateRequest.php
+lib/Model/UserStats.php
 lib/ObjectSerializer.php
 phpunit.xml.dist
-test/Api/MailConfigurationAPIApiTest.php

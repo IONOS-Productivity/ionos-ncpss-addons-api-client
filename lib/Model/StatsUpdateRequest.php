@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ImapConfig
+ * StatsUpdateRequest
  *
  * PHP version 8.1
  *
@@ -41,16 +41,15 @@ use \ArrayAccess;
 use \IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
 
 /**
- * ImapConfig Class Doc Comment
+ * StatsUpdateRequest Class Doc Comment
  *
  * @category Class
- * @description Imap server configuration.
  * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
+class StatsUpdateRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -59,7 +58,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ImapConfig';
+    protected static $openAPIModelName = 'StatsUpdateRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -67,9 +66,8 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'host' => 'string',
-        'port' => 'int',
-        'sslMode' => 'string'
+        'timestamp' => '\DateTime',
+        'users' => '\IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats'
     ];
 
     /**
@@ -80,9 +78,8 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'host' => null,
-        'port' => 'int32',
-        'sslMode' => null
+        'timestamp' => 'date-time',
+        'users' => null
     ];
 
     /**
@@ -91,9 +88,8 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'host' => false,
-        'port' => false,
-        'sslMode' => false
+        'timestamp' => false,
+        'users' => false
     ];
 
     /**
@@ -182,9 +178,8 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'host' => 'host',
-        'port' => 'port',
-        'sslMode' => 'sslMode'
+        'timestamp' => 'timestamp',
+        'users' => 'users'
     ];
 
     /**
@@ -193,9 +188,8 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'host' => 'setHost',
-        'port' => 'setPort',
-        'sslMode' => 'setSslMode'
+        'timestamp' => 'setTimestamp',
+        'users' => 'setUsers'
     ];
 
     /**
@@ -204,9 +198,8 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'host' => 'getHost',
-        'port' => 'getPort',
-        'sslMode' => 'getSslMode'
+        'timestamp' => 'getTimestamp',
+        'users' => 'getUsers'
     ];
 
     /**
@@ -266,9 +259,8 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('host', $data ?? [], null);
-        $this->setIfExists('port', $data ?? [], null);
-        $this->setIfExists('sslMode', $data ?? [], null);
+        $this->setIfExists('timestamp', $data ?? [], null);
+        $this->setIfExists('users', $data ?? [], null);
     }
 
     /**
@@ -298,6 +290,12 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['timestamp'] === null) {
+            $invalidProperties[] = "'timestamp' can't be null";
+        }
+        if ($this->container['users'] === null) {
+            $invalidProperties[] = "'users' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -314,82 +312,55 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets host
+     * Gets timestamp
      *
-     * @return string|null
+     * @return \DateTime
      */
-    public function getHost()
+    public function getTimestamp()
     {
-        return $this->container['host'];
+        return $this->container['timestamp'];
     }
 
     /**
-     * Sets host
+     * Sets timestamp
      *
-     * @param string|null $host imap host
+     * @param \DateTime $timestamp timestamp
      *
      * @return self
      */
-    public function setHost($host)
+    public function setTimestamp($timestamp)
     {
-        if (is_null($host)) {
-            throw new \InvalidArgumentException('non-nullable host cannot be null');
+        if (is_null($timestamp)) {
+            throw new \InvalidArgumentException('non-nullable timestamp cannot be null');
         }
-        $this->container['host'] = $host;
+        $this->container['timestamp'] = $timestamp;
 
         return $this;
     }
 
     /**
-     * Gets port
+     * Gets users
      *
-     * @return int|null
+     * @return \IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats
      */
-    public function getPort()
+    public function getUsers()
     {
-        return $this->container['port'];
+        return $this->container['users'];
     }
 
     /**
-     * Sets port
+     * Sets users
      *
-     * @param int|null $port imap port
+     * @param \IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats $users users
      *
      * @return self
      */
-    public function setPort($port)
+    public function setUsers($users)
     {
-        if (is_null($port)) {
-            throw new \InvalidArgumentException('non-nullable port cannot be null');
+        if (is_null($users)) {
+            throw new \InvalidArgumentException('non-nullable users cannot be null');
         }
-        $this->container['port'] = $port;
-
-        return $this;
-    }
-
-    /**
-     * Gets sslMode
-     *
-     * @return string|null
-     */
-    public function getSslMode()
-    {
-        return $this->container['sslMode'];
-    }
-
-    /**
-     * Sets sslMode
-     *
-     * @param string|null $sslMode SSL mode
-     *
-     * @return self
-     */
-    public function setSslMode($sslMode)
-    {
-        if (is_null($sslMode)) {
-            throw new \InvalidArgumentException('non-nullable sslMode cannot be null');
-        }
-        $this->container['sslMode'] = $sslMode;
+        $this->container['users'] = $users;
 
         return $this;
     }

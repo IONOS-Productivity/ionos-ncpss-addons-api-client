@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ImapConfig
+ * UserStats
  *
  * PHP version 8.1
  *
@@ -41,16 +41,15 @@ use \ArrayAccess;
 use \IONOS\NextcloudPSS\AddonsAPI\Client\ObjectSerializer;
 
 /**
- * ImapConfig Class Doc Comment
+ * UserStats Class Doc Comment
  *
  * @category Class
- * @description Imap server configuration.
  * @package  IONOS\NextcloudPSS\AddonsAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
+class UserStats implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -59,7 +58,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ImapConfig';
+    protected static $openAPIModelName = 'UserStats';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -67,9 +66,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'host' => 'string',
-        'port' => 'int',
-        'sslMode' => 'string'
+        'existingUsers' => 'int'
     ];
 
     /**
@@ -80,9 +77,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'host' => null,
-        'port' => 'int32',
-        'sslMode' => null
+        'existingUsers' => 'int32'
     ];
 
     /**
@@ -91,9 +86,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'host' => false,
-        'port' => false,
-        'sslMode' => false
+        'existingUsers' => false
     ];
 
     /**
@@ -182,9 +175,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'host' => 'host',
-        'port' => 'port',
-        'sslMode' => 'sslMode'
+        'existingUsers' => 'existingUsers'
     ];
 
     /**
@@ -193,9 +184,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'host' => 'setHost',
-        'port' => 'setPort',
-        'sslMode' => 'setSslMode'
+        'existingUsers' => 'setExistingUsers'
     ];
 
     /**
@@ -204,9 +193,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'host' => 'getHost',
-        'port' => 'getPort',
-        'sslMode' => 'getSslMode'
+        'existingUsers' => 'getExistingUsers'
     ];
 
     /**
@@ -266,9 +253,7 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('host', $data ?? [], null);
-        $this->setIfExists('port', $data ?? [], null);
-        $this->setIfExists('sslMode', $data ?? [], null);
+        $this->setIfExists('existingUsers', $data ?? [], null);
     }
 
     /**
@@ -298,6 +283,10 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['existingUsers']) && ($this->container['existingUsers'] < 0)) {
+            $invalidProperties[] = "invalid value for 'existingUsers', must be bigger than or equal to 0.";
+        }
+
         return $invalidProperties;
     }
 
@@ -314,82 +303,33 @@ class ImapConfig implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets host
-     *
-     * @return string|null
-     */
-    public function getHost()
-    {
-        return $this->container['host'];
-    }
-
-    /**
-     * Sets host
-     *
-     * @param string|null $host imap host
-     *
-     * @return self
-     */
-    public function setHost($host)
-    {
-        if (is_null($host)) {
-            throw new \InvalidArgumentException('non-nullable host cannot be null');
-        }
-        $this->container['host'] = $host;
-
-        return $this;
-    }
-
-    /**
-     * Gets port
+     * Gets existingUsers
      *
      * @return int|null
      */
-    public function getPort()
+    public function getExistingUsers()
     {
-        return $this->container['port'];
+        return $this->container['existingUsers'];
     }
 
     /**
-     * Sets port
+     * Sets existingUsers
      *
-     * @param int|null $port imap port
+     * @param int|null $existingUsers existingUsers
      *
      * @return self
      */
-    public function setPort($port)
+    public function setExistingUsers($existingUsers)
     {
-        if (is_null($port)) {
-            throw new \InvalidArgumentException('non-nullable port cannot be null');
+        if (is_null($existingUsers)) {
+            throw new \InvalidArgumentException('non-nullable existingUsers cannot be null');
         }
-        $this->container['port'] = $port;
 
-        return $this;
-    }
-
-    /**
-     * Gets sslMode
-     *
-     * @return string|null
-     */
-    public function getSslMode()
-    {
-        return $this->container['sslMode'];
-    }
-
-    /**
-     * Sets sslMode
-     *
-     * @param string|null $sslMode SSL mode
-     *
-     * @return self
-     */
-    public function setSslMode($sslMode)
-    {
-        if (is_null($sslMode)) {
-            throw new \InvalidArgumentException('non-nullable sslMode cannot be null');
+        if (($existingUsers < 0)) {
+            throw new \InvalidArgumentException('invalid value for $existingUsers when calling UserStats., must be bigger than or equal to 0.');
         }
-        $this->container['sslMode'] = $sslMode;
+
+        $this->container['existingUsers'] = $existingUsers;
 
         return $this;
     }

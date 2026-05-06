@@ -484,7 +484,7 @@ use {{invokerPackage}}\ObjectSerializer;
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
+                    $statusCode = $response ? $response->getStatusCode() : $exception->getCode();
                     throw new ApiException(
                         sprintf(
                             '[%d] Error connecting to the API (%s)',
@@ -492,8 +492,8 @@ use {{invokerPackage}}\ObjectSerializer;
                             $exception->getRequest()->getUri()
                         ),
                         $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
+                        $response ? $response->getHeaders() : [],
+                        $response ? (string) $response->getBody() : null
                     );
                 }
             );
