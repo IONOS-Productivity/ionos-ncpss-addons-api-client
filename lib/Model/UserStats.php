@@ -283,6 +283,9 @@ class UserStats implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['existingUsers'] === null) {
+            $invalidProperties[] = "'existingUsers' can't be null";
+        }
         if (!is_null($this->container['existingUsers']) && ($this->container['existingUsers'] < 0)) {
             $invalidProperties[] = "invalid value for 'existingUsers', must be bigger than or equal to 0.";
         }

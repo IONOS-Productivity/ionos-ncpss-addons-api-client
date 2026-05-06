@@ -46,6 +46,7 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use PHPUnit\Framework\TestCase;
 
@@ -110,20 +111,25 @@ class StatsAPIApiTest extends TestCase
      */
     public function testUpdateStats()
     {
-        // Mock successful response
         $responseBody = '';
         $this->mockHandler->append(new Response(204, [], $responseBody));
 
-        // Setup test parameters
         $brand = 'test_brand';
         $extRef = 'test_extRef';
-        $statsUpdateRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest();
 
-        // Execute the API call
+        $users = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats();
+        $users->setExistingUsers(42);
+
+        $statsUpdateRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest();
+        $statsUpdateRequest->setTimestamp(new \DateTime('2026-04-29T08:04:05Z'));
+        $statsUpdateRequest->setUsers($users);
+
         $this->api->updateStats($brand, $extRef, $statsUpdateRequest);
 
-        // If we get here without exception, the test passes
-        $this->assertTrue(true);
+        $lastRequest = $this->mockHandler->getLastRequest();
+        $body = json_decode((string) $lastRequest->getBody(), true);
+        $this->assertArrayHasKey('timestamp', $body);
+        $this->assertEquals(42, $body['users']['existingUsers']);
     }
 
     /**
@@ -134,24 +140,26 @@ class StatsAPIApiTest extends TestCase
      */
     public function testUpdateStatsWithHttpInfo()
     {
-        // Mock successful response
         $responseBody = '';
         $this->mockHandler->append(new Response(204, ['Content-Type' => 'application/json'], $responseBody));
 
-        // Setup test parameters
         $brand = 'test_brand';
         $extRef = 'test_extRef';
-        $statsUpdateRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest();
 
-        // Execute the API call with HTTP info
+        $users = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats();
+        $users->setExistingUsers(5);
+
+        $statsUpdateRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest();
+        $statsUpdateRequest->setTimestamp(new \DateTime('2026-04-29T08:04:05Z'));
+        $statsUpdateRequest->setUsers($users);
+
         $result = $this->api->updateStatsWithHttpInfo($brand, $extRef, $statsUpdateRequest);
 
-        // Verify the result structure
         $this->assertIsArray($result);
         $this->assertCount(3, $result);
-        $this->assertNull($result[0]); // No response data expected
-        $this->assertEquals(204, $result[1]); // Status code
-        $this->assertIsArray($result[2]); // Headers
+        $this->assertNull($result[0]);
+        $this->assertEquals(204, $result[1]);
+        $this->assertIsArray($result[2]);
     }
 
     /**
@@ -162,18 +170,40 @@ class StatsAPIApiTest extends TestCase
      */
     public function testUpdateStatsException()
     {
-        // Mock error response
-        $this->mockHandler->append(new Response(400, [], '{"error": "Bad Request"}'));
+        $this->mockHandler->append(new Response(400, [], '{"status":"400 BAD_REQUEST","message":"Invalid payload","requestId":"req-1"}'));
 
-        // Setup test parameters
         $brand = 'test_brand';
         $extRef = 'test_extRef';
+
+        $users = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats();
+        $users->setExistingUsers(0);
+
         $statsUpdateRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest();
+        $statsUpdateRequest->setTimestamp(new \DateTime('2026-04-29T08:04:05Z'));
+        $statsUpdateRequest->setUsers($users);
 
-        // Expect ApiException to be thrown
         $this->expectException(ApiException::class);
-
-        // Execute the API call
         $this->api->updateStats($brand, $extRef, $statsUpdateRequest);
+    }
+
+    public function testUpdateStatsAsyncConnectException()
+    {
+        $brand = 'test_brand';
+        $extRef = 'test_extRef';
+
+        $this->mockHandler->append(new ConnectException(
+            'Connection refused',
+            new Request('PUT', 'https://API_HOST/nextcloud/addons/' . $brand . '/' . $extRef . '/stats')
+        ));
+
+        $users = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\UserStats();
+        $users->setExistingUsers(1);
+
+        $statsUpdateRequest = new \IONOS\NextcloudPSS\AddonsAPI\Client\Model\StatsUpdateRequest();
+        $statsUpdateRequest->setTimestamp(new \DateTime('2026-04-29T08:04:05Z'));
+        $statsUpdateRequest->setUsers($users);
+
+        $this->expectException(ApiException::class);
+        $this->api->updateStatsAsync($brand, $extRef, $statsUpdateRequest)->wait();
     }
 }
